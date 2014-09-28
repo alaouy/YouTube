@@ -1,0 +1,24 @@
+{
+  "name": "alaouy/youtube",
+  "description": "PHP wrapper for the Youtube Data API v3",
+  "keywords": ["youtube", "api", "video", "laravel", "alaouy"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mustapha Alaouy",
+      "email": "alaouym@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "require-dev":{
+    "phpunit/phpunit": "3.7.*@stable"
+  },
+  "autoload": {
+    "psr-0": {
+      "Alaouy\\Youtube\\": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}
