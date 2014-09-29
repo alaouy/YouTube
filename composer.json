@@ -1,6 +1,6 @@
 {
   "name": "alaouy/youtube",
-  "description": "PHP wrapper for the Youtube Data API v3",
+  "description": "Laravel PHP Facade/Wrapper for the Youtube Data API v3",
   "keywords": ["youtube", "api", "video", "laravel", "alaouy"],
   "license": "MIT",
   "authors": [
