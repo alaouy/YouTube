@@ -38,6 +38,9 @@ Run `php artisan config:publish alaouy/youtube` and modify the config file with 
 // Return a std PHP object 
 $video = Youtube::getVideoInfo('rie-hPVJ7Sw');
 
+// Get popular videos in a country, Return an array of PHP objects
+$videoList = Youtube::getPopularVideos('us');
+
 // Search playlists, channels and videos, Return an array of PHP objects
 $results = Youtube::search('Android');
 
