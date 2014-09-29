@@ -73,6 +73,20 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase {
 		$this->assertObjectHasAttribute( 'contentDetails', $response );
 	}
 
+	public function testGetPopularVideos() {
+		$maxResult = rand(10, 40);
+		$regionCode = 'us';
+		$response = $this->youtube->getPopularVideos( $regionCode, $maxResult );
+
+		$this->assertNotNull( 'response' );
+		$this->assertEquals( $maxResult, count( $response ) );
+		$this->assertEquals( 'youtube#video', $response[0]->kind );
+		$this->assertObjectHasAttribute( 'statistics', $response[0] );
+		$this->assertObjectHasAttribute( 'status', $response[0] );
+		$this->assertObjectHasAttribute( 'snippet', $response[0] );
+		$this->assertObjectHasAttribute( 'contentDetails', $response[0] );
+	}
+
 	public function testSearch() {
 		$limit = rand( 3, 10 );
 		$response = $this->youtube->search( 'Android', $limit );

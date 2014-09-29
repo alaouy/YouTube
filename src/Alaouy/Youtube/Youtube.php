@@ -57,6 +57,26 @@ class Youtube {
 	}
 
 	/**
+	 * Gets popular videos for a specific region (ISO 3166-1 alpha-2)
+	 *
+	 * @param $regionCode
+	 * @param int $maxResults
+	 * @return array
+	 */
+	public function getPopularVideos($regionCode,  $maxResults = 10) {
+		$API_URL = $this->getApi('videos.list');
+		$params = array(
+			'chart' => 'mostPopular',
+			'part' => 'id, snippet, contentDetails, player, statistics, status',
+			'regionCode' => $regionCode,
+			'maxResults' => $maxResults
+		);
+
+		$apiData = $this->api_get($API_URL, $params);
+		return $this->decodeList($apiData);
+	}
+	
+	/**
 	 * Simple search interface, this search all stuffs
 	 * and order by relevance
 	 *
