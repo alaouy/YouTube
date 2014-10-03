@@ -430,6 +430,7 @@ class Youtube {
 			curl_setopt($tuCurl, CURLOPT_PORT, 443);
 		}
 		curl_setopt($tuCurl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($tuCurl, CURLOPT_SSL_VERIFYPEER, FALSE);
 		$tuData = curl_exec($tuCurl);
 		if (curl_errno($tuCurl)) {
 			throw new \Exception('Curl Error : ' . curl_error($tuCurl));
