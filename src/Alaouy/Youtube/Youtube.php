@@ -40,11 +40,12 @@ class Youtube {
 	}
 
 	/**
-	 * @param $vId
+	 * @param $vId string can be used comma seperated to get multiple videos
+	 * @param $single
 	 * @return \StdClass
 	 * @throws \Exception
 	 */
-	public function getVideoInfo($vId) {
+	public function getVideoInfo($vId, $single = true) {
 		$API_URL = $this->getApi('videos.list');
 		$params = array(
 			'id' => $vId,
@@ -53,7 +54,14 @@ class Youtube {
 		);
 
 		$apiData = $this->api_get($API_URL, $params);
-		return $this->decodeSingle($apiData);
+		
+		if($single == true)
+		{
+			return $this->decodeSingle($apiData);
+		}else
+		{
+			return $this->decodeMultiple($apiData);
+		}
 	}
 
 	/**
@@ -373,6 +381,32 @@ class Youtube {
 			}
 		}
 	}
+	
+	/**
+	 * Decode the response from youtube, extract the multiple resource object.
+	 *
+	 * @param  string $apiData the api response from youtube
+	 * @throws \Exception
+	 * @return \StdClass  an Youtube resource object
+	 */
+	public function decodeMultiple(&$apiData) {
+		$resObj = json_decode($apiData);
+		if (isset($resObj->error)) {
+			$msg = "Error " . $resObj->error->code . " " . $resObj->error->message;
+			if (isset($resObj->error->errors[0])) {
+				$msg .= " : " . $resObj->error->errors[0]->reason;
+			}
+			throw new \Exception($msg);
+		} else {
+			$itemsArray = $resObj->items;
+			if (!is_array($itemsArray)) {
+				return false;
+			} else {
+				return $itemsArray;
+			}
+		}
+	}
+	
 
 	/**
 	 * Decode the response from youtube, extract the list of resource objects
@@ -430,6 +464,7 @@ class Youtube {
 			curl_setopt($tuCurl, CURLOPT_PORT, 443);
 		}
 		curl_setopt($tuCurl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($tuCurl, CURLOPT_SSL_VERIFYPEER, FALSE);
 		$tuData = curl_exec($tuCurl);
 		if (curl_errno($tuCurl)) {
 			throw new \Exception('Curl Error : ' . curl_error($tuCurl));
