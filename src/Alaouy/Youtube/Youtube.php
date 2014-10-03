@@ -40,11 +40,12 @@ class Youtube {
 	}
 
 	/**
-	 * @param $vId
+	 * @param $vId string can be used comma seperated to get multiple videos
+	 * @param $single
 	 * @return \StdClass
 	 * @throws \Exception
 	 */
-	public function getVideoInfo($vId) {
+	public function getVideoInfo($vId, $single = true) {
 		$API_URL = $this->getApi('videos.list');
 		$params = array(
 			'id' => $vId,
@@ -53,7 +54,14 @@ class Youtube {
 		);
 
 		$apiData = $this->api_get($API_URL, $params);
-		return $this->decodeSingle($apiData);
+		
+		if($single == true)
+		{
+			return $this->decodeSingle($apiData);
+		}else
+		{
+			return $apiData;
+		}
 	}
 
 	/**
