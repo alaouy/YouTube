@@ -60,7 +60,7 @@ class Youtube {
 			return $this->decodeSingle($apiData);
 		}else
 		{
-			return $apiData;
+			return $this->decodeMultiple($apiData);
 		}
 	}
 
@@ -381,6 +381,33 @@ class Youtube {
 			}
 		}
 	}
+	
+	/**
+	 * Decode the response from youtube, extract the single resource object.
+	 * (Don't use this to decode the response containing list of objects)
+	 *
+	 * @param  string $apiData the api response from youtube
+	 * @throws \Exception
+	 * @return \StdClass  an Youtube resource object
+	 */
+	public function decodeMultiple(&$apiData) {
+		$resObj = json_decode($apiData);
+		if (isset($resObj->error)) {
+			$msg = "Error " . $resObj->error->code . " " . $resObj->error->message;
+			if (isset($resObj->error->errors[0])) {
+				$msg .= " : " . $resObj->error->errors[0]->reason;
+			}
+			throw new \Exception($msg);
+		} else {
+			$itemsArray = $resObj->items;
+			if (!is_array($itemsArray)) {
+				return false;
+			} else {
+				return $itemsArray;
+			}
+		}
+	}
+	
 
 	/**
 	 * Decode the response from youtube, extract the list of resource objects
