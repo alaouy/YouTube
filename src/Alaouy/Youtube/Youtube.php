@@ -383,8 +383,7 @@ class Youtube {
 	}
 	
 	/**
-	 * Decode the response from youtube, extract the single resource object.
-	 * (Don't use this to decode the response containing list of objects)
+	 * Decode the response from youtube, extract the multiple resource object.
 	 *
 	 * @param  string $apiData the api response from youtube
 	 * @throws \Exception
