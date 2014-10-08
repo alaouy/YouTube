@@ -40,20 +40,24 @@ class Youtube {
 	}
 
 	/**
-	 * @param $vId
+	 * @param $single
 	 * @return \StdClass
 	 * @throws \Exception
 	 */
 	public function getVideoInfo($vId) {
 		$API_URL = $this->getApi('videos.list');
 		$params = array(
-			'id' => $vId,
+			'id' => is_array($vId) ? implode(',', $vId) : $vId,
 			'key' => $this->youtube_key,
 			'part' => 'id, snippet, contentDetails, player, statistics, status',
 		);
 
 		$apiData = $this->api_get($API_URL, $params);
-		return $this->decodeSingle($apiData);
+		
+		if(is_array($vId))
+        		return $this->decodeMultiple($apiData);
+
+        	return $this->decodeSingle($apiData);
 	}
 
 	/**
@@ -373,6 +377,32 @@ class Youtube {
 			}
 		}
 	}
+	
+	/**
+	 * Decode the response from youtube, extract the multiple resource object.
+	 *
+	 * @param  string $apiData the api response from youtube
+	 * @throws \Exception
+	 * @return \StdClass  an Youtube resource object
+	 */
+	public function decodeMultiple(&$apiData) {
+		$resObj = json_decode($apiData);
+		if (isset($resObj->error)) {
+			$msg = "Error " . $resObj->error->code . " " . $resObj->error->message;
+			if (isset($resObj->error->errors[0])) {
+				$msg .= " : " . $resObj->error->errors[0]->reason;
+			}
+			throw new \Exception($msg);
+		} else {
+			$itemsArray = $resObj->items;
+			if (!is_array($itemsArray)) {
+				return false;
+			} else {
+				return $itemsArray;
+			}
+		}
+	}
+	
 
 	/**
 	 * Decode the response from youtube, extract the list of resource objects
