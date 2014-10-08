@@ -35,7 +35,7 @@ class Youtube {
 		if (is_string($key) && !empty($key)) {
 			$this->youtube_key = $key;
 		} else {
-			throw new \Exception('Google API key is Required, please visit http://code.google.com/apis/console');
+				throw new \Exception('Google API key is Required, please visit https://console.developers.google.com/');
 		}
 	}
 
@@ -55,9 +55,9 @@ class Youtube {
 		$apiData = $this->api_get($API_URL, $params);
 		
 		if(is_array($vId))
-      return $this->decodeMultiple($apiData);
+			return $this->decodeMultiple($apiData);
 
-    return $this->decodeSingle($apiData);
+		return $this->decodeSingle($apiData);
 	}
 
 	/**

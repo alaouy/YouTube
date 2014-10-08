@@ -74,18 +74,18 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase {
 	}
 	
 	public function testGetVideoInfoMultiple() {
-    $vIDs = ['rie-hPVJ7Sw','iKHTawgyKWQ'];
-    $response = $this->youtube->getVideoInfo( $vIDs );
+		$vIDs = ['rie-hPVJ7Sw','iKHTawgyKWQ'];
+		$response = $this->youtube->getVideoInfo( $vIDs );
 
-    $this->assertEquals( $vIDs[0], $response[0]->id );
-    $this->assertNotNull( 'response' );
-    $this->assertEquals( 'youtube#video', $response[0]->kind );
-    //add all these assertions here in case the api is changed,
-    //we can detect it instantly
-    $this->assertObjectHasAttribute( 'statistics', $response[0] );
-    $this->assertObjectHasAttribute( 'status', $response[0] );
-    $this->assertObjectHasAttribute( 'snippet', $response[0] );
-    $this->assertObjectHasAttribute( 'contentDetails', $response[0] );
+		$this->assertEquals( $vIDs[0], $response[0]->id );
+		$this->assertNotNull( 'response' );
+		$this->assertEquals( 'youtube#video', $response[0]->kind );
+		//add all these assertions here in case the api is changed,
+		//we can detect it instantly
+		$this->assertObjectHasAttribute( 'statistics', $response[0] );
+		$this->assertObjectHasAttribute( 'status', $response[0] );
+		$this->assertObjectHasAttribute( 'snippet', $response[0] );
+		$this->assertObjectHasAttribute( 'contentDetails', $response[0] );
 	}
 
 	public function testGetPopularVideos() {
