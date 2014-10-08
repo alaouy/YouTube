@@ -40,28 +40,24 @@ class Youtube {
 	}
 
 	/**
-	 * @param $vId string can be used comma seperated to get multiple videos
 	 * @param $single
 	 * @return \StdClass
 	 * @throws \Exception
 	 */
-	public function getVideoInfo($vId, $single = true) {
+	public function getVideoInfo($vId) {
 		$API_URL = $this->getApi('videos.list');
 		$params = array(
-			'id' => $vId,
+			'id' => is_array($vId) ? implode(',', $vId) : $vId,
 			'key' => $this->youtube_key,
 			'part' => 'id, snippet, contentDetails, player, statistics, status',
 		);
 
 		$apiData = $this->api_get($API_URL, $params);
 		
-		if($single == true)
-		{
-			return $this->decodeSingle($apiData);
-		}else
-		{
-			return $this->decodeMultiple($apiData);
-		}
+		if(is_array($vId))
+        		return $this->decodeMultiple($apiData);
+
+        	return $this->decodeSingle($apiData);
 	}
 
 	/**
@@ -464,7 +460,6 @@ class Youtube {
 			curl_setopt($tuCurl, CURLOPT_PORT, 443);
 		}
 		curl_setopt($tuCurl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($tuCurl, CURLOPT_SSL_VERIFYPEER, FALSE);
 		$tuData = curl_exec($tuCurl);
 		if (curl_errno($tuCurl)) {
 			throw new \Exception('Curl Error : ' . curl_error($tuCurl));
