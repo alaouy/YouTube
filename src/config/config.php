@@ -1,7 +1,7 @@
 <?php 
 
 
-// You can find the keys here : http://code.google.com/apis/console
+// You can find the keys here : https://console.developers.google.com
 
 return array(
 	'KEY' => 'YOUR API KEY'
