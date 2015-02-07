@@ -1,7 +1,9 @@
 <?php namespace Alaouy\Youtube;
 
+
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Config;
+use Illuminate\Support\Str;
 
 class YoutubeServiceProvider extends ServiceProvider {
 
@@ -19,9 +21,14 @@ class YoutubeServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('alaouy/youtube', 'alaouy/youtube');
-		$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-  	$loader->alias('Youtube', 'Alaouy\Youtube\Facades\Youtube');
+
+        if ($this->isLegacyLaravel() || $this->isOldLaravel())
+        {
+            $this->package('alaouy/youtube', 'alaouy/youtube');
+        }
+
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Youtube', 'Alaouy\Youtube\Facades\Youtube');
 	}
 
 	/**
@@ -31,11 +38,23 @@ class YoutubeServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['youtube'] = $this->app->share(function($app)
-	  {
-	  	$key = Config::get('alaouy/youtube::KEY');
-	    return new Youtube($key);
-	  });
+		if ($this->isLegacyLaravel() || $this->isOldLaravel())
+        {
+            $this->app['youtube'] = $this->app->share(function($app)
+            {
+                $key = \Config::get('alaouy/youtube::KEY');
+                return new Youtube($key);
+            });
+
+            return;
+		}
+
+        $this->publishes(array(__DIR__ . '/../../config/youtube.php' => config_path('youtube.php')));
+
+        $this->app->bindShared('youtube', function()
+        {
+            return $this->app->make('Alaouy\Youtube\Youtube', [config('youtube.KEY')]);
+        });
 	}
 
 	/**
@@ -47,5 +66,15 @@ class YoutubeServiceProvider extends ServiceProvider {
 	{
 		return array('youtube');
 	}
+
+    public function isLegacyLaravel()
+    {
+        return Str::startsWith(Application::VERSION, array('4.1.', '4.2.'));
+    }
+
+    public function isOldLaravel()
+    {
+        return Str::startsWith(Application::VERSION, '4.0.');
+    }
 
 }
