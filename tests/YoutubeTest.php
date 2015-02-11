@@ -1,6 +1,6 @@
 <?php namespace Alaouy\Tests;
 
-require_once __DIR__ . '/../../../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Alaouy\Youtube\Youtube;
 
