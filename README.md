@@ -26,19 +26,17 @@ Now open up `app/config/app.php` and add the service provider to your `providers
 
 ## Configuration
 ### For Laravel 5
-Run `php artisan vendor:publish --provider='Alaouy\Youtube\YoutubeServiceProvider'` and modify the config file with your API Key.
+Run `php artisan vendor:publish` and set your API key in the file :
 ```
 /app/config/youtube.php
 ```
 ### For Laravel 4
-Run `php artisan config:publish alaouy/youtube` and modify the config file with your API Key.
+Run `php artisan config:publish alaouy/youtube` and set your API key in the file :
 ```
 /app/config/packages/alaouy/youtube/config.php
 ```
 
 ## Usage
-
-Laravel 5 uses namespaces in controllers. Pleased  use as `\Youtube:MethodName`
 
 ```php
 
