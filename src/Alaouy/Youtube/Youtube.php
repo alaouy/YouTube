@@ -301,8 +301,14 @@ class Youtube {
 	 */
 	public static function parseVIdFromURL($youtube_url) {
 		if (strpos($youtube_url, 'youtube.com')) {
-			$params = static::_parse_url_query($youtube_url);
-			return $params['v'];
+			if (strpos($youtube_url, 'embed')) {
+				$path = static::_parse_url_path($youtube_url);
+				$vid = substr($path, 7);
+				return $vid;
+			} else {
+				$params = static::_parse_url_query($youtube_url);
+				return $params['v'];
+			}
 		} else if (strpos($youtube_url, 'youtu.be')) {
 			$path = static::_parse_url_path($youtube_url);
 			$vid = substr($path, 1);

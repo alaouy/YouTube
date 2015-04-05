@@ -190,6 +190,11 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( '1FJHYqE0RDg', $vId );
 	}
 
+	public function testParseVIdFromEmbedURL() {
+		$vId = $this->youtube->parseVIdFromURL( 'http://youtube.com/embed/1FJHYqE0RDg' );
+		$this->assertEquals( '1FJHYqE0RDg', $vId );
+	}
+
 	/**
 	 *
 	 *
