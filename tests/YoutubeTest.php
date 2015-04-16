@@ -176,8 +176,9 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase {
 		$GOOGLE_ZEITGEIST_PLAYLIST = 'PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs';
 		$response = $this->youtube->getPlaylistItemsByPlaylistId( $GOOGLE_ZEITGEIST_PLAYLIST );
 
-		$this->assertTrue( count( $response ) > 0 );
-		$this->assertEquals( 'youtube#playlistItem', $response[0]->kind );
+		$data = $response['data'];
+		$this->assertTrue( count( $data ) > 0 );
+		$this->assertEquals( 'youtube#playlistItem', $data[0]->kind );
 	}
 
 	public function testParseVIdFromURLFull() {
