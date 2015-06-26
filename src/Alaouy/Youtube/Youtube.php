@@ -290,14 +290,15 @@ class Youtube {
 	 * @return array
 	 * @throws \Exception
 	 */
-    public function getActivitiesByChannelId($channelId, $part = ['id', 'snippet', 'contentDetails']) {
+    public function getActivitiesByChannelId($channelId, $part = ['id', 'snippet', 'contentDetails'], $maxResults = 5) {
 		if (empty($channelId)) {
 			throw new \InvalidArgumentException('ChannelId must be supplied');
 		}
 		$API_URL = $this->getApi('activities');
 		$params = array(
 			'channelId' => $channelId,
-            'part' => implode(', ', $part),
+            		'part' => implode(', ', $part),
+            		'maxResults' => $maxResults,
 		);
 		$apiData = $this->api_get($API_URL, $params);
 		return $this->decodeList($apiData);
