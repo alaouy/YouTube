@@ -304,6 +304,28 @@ class Youtube {
 		return $this->decodeList($apiData);
 	}
 
+
+    /**
+     * @param  string $videoId
+     * @return array
+     * @throws \Exception
+     */
+    public function getRelatedVideos($videoId, $part = ['id', 'snippet'], $maxResults = 5) {
+        if (empty($videoId)) {
+            throw new \InvalidArgumentException('A video id must be supplied');
+        }
+        $API_URL = $this->getApi('search.list');
+        $params = array(
+            'type' => 'video',
+            'relatedToVideoId' => $videoId,
+            'part' => implode(', ', $part),
+            'maxResults' => $maxResults,
+        );
+        $apiData = $this->api_get($API_URL, $params);
+        return $this->decodeList($apiData);
+    }
+
+
 	/**
 	 * Parse a youtube URL to get the youtube Vid.
 	 * Support both full URL (www.youtube.com) and short URL (youtu.be)

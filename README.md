@@ -46,6 +46,9 @@ $video = Youtube::getVideoInfo('rie-hPVJ7Sw');
 // Get Multiple videos info from an array
 $videoList = Youtube::getVideoInfo(['rie-hPVJ7Sw','iKHTawgyKWQ']);
 
+// Get Multiple videos related to a video
+$relatedVideos = Youtube::getRelatedVideos('iKHTawgyKWQ');
+
 // Get popular videos in a country, Return an array of PHP objects
 $videoList = Youtube::getPopularVideos('us');
 
