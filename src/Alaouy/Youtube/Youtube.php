@@ -310,7 +310,7 @@ class Youtube {
      * @return array
      * @throws \Exception
      */
-    public function getRelatedVideos($videoId, $part = ['id', 'snippet'], $maxResults = 5) {
+    public function getRelatedVideos($videoId, $maxResults = 5, $part = ['id', 'snippet']) {
         if (empty($videoId)) {
             throw new \InvalidArgumentException('A video id must be supplied');
         }
