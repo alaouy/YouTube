@@ -1,6 +1,8 @@
 Youtube
 =========
 
+[![Build Status][build]][travis]
+
 Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 
 You need to create an application and create your access token in the [developer console](https://console.developers.google.com).
