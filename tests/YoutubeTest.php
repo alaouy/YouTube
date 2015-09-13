@@ -51,14 +51,13 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorFail2()
     {
-        $this->youtube = new Youtube('FAKE API KEY');
+        $this->youtube = new Youtube('');
     }
 
     /**
      *
      *
      * @expectedException \Exception
-     * @expectedExceptionMessage    Error 400 Bad Request : keyInvalid
      */
     public function testInvalidApiKey()
     {
