@@ -583,7 +583,7 @@ class Youtube
             $item = explode('=', $param);
             $params[$item[0]] = empty($item[1]) ? '' : $item[1];
         }
-        
+
         return $params;
     }
 }
