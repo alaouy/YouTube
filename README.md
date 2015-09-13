@@ -1,7 +1,7 @@
 Youtube
 =========
 
-[![Build Status][build]][travis]
+![Travis Youtube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master)
 
 Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 
