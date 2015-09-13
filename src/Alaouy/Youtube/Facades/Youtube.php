@@ -1,4 +1,7 @@
-<?php namespace Alaouy\Youtube\Facades;
+<?php
+
+namespace Alaouy\Youtube\Facades;
+
 use Illuminate\Support\Facades\Facade;
 
 class Youtube extends Facade {
