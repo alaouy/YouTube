@@ -100,7 +100,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetPopularVideos()
     {
-        $maxResult = rand(10, 40);
+        $maxResult = rand(10, 30);
         $regionCode = 'us';
         $response = $this->youtube->getPopularVideos($regionCode, $maxResult);
 
