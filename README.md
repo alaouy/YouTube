@@ -152,7 +152,7 @@ print_r($search['results']);
 
 ```
 
-The pagination above is quite basic. Depending on what you are trying to achieve; you may want to create a recurssive function that traverses the results.
+The pagination above is quite basic. Depending on what you are trying to achieve; you may want to create a recursive function that traverses the results.
 
 
 ## Run Unit Test
@@ -170,7 +170,7 @@ $ ./vendor/bin/phpunit
 ```
 
 ## Format of returned data
-The returnd json is decoded as PHP objects (not Array).
+The returned json is decoded as PHP objects (not Array).
 Please read the ["Reference" section](https://developers.google.com/youtube/v3/docs/) of the Official API doc.
 
 
