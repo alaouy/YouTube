@@ -7,8 +7,6 @@ Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 
 You need to create an application and create your access token in the [developer console](https://console.developers.google.com).
 
-
-
 ## Installation
 
 Add `alaouy/youtube` to your `composer.json`.
@@ -19,21 +17,24 @@ Add `alaouy/youtube` to your `composer.json`.
 Run `composer update` to pull down the latest version of the package.
 
 Now open up `app/config/app.php` and add the service provider to your `providers` array.
+
 ```php
 'providers' => array(
 	'Alaouy\Youtube\YoutubeServiceProvider',
 )
 ```
 
-
 ## Configuration
 ### For Laravel 5
 Run `php artisan vendor:publish` and set your API key in the file:
+
 ```
 /app/config/youtube.php
 ```
+
 ### For Laravel 4
 Run `php artisan config:publish alaouy/youtube` and set your API key in the file:
+
 ```
 /app/config/packages/alaouy/youtube/config.php
 ```
@@ -41,7 +42,6 @@ Run `php artisan config:publish alaouy/youtube` and set your API key in the file
 ## Usage
 
 ```php
-
 // Return an STD PHP object
 $video = Youtube::getVideoInfo('rie-hPVJ7Sw');
 
@@ -89,8 +89,8 @@ $videoId =Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk'
 ```
 
 ## Basic Search Pagination
-```php
 
+```php
 // Set default parameters
 $params = array(
     'q'             => 'Android',
@@ -149,11 +149,9 @@ $search = Youtube::paginateResults($params, $pageTokens[0]);
 
 // Add results key with info parameter set
 print_r($search['results']);
-
 ```
 
 The pagination above is quite basic. Depending on what you are trying to achieve you may want to create a recursive function that traverses the results.
-
 
 ## Run Unit Test
 If you have PHPUnit installed in your environment, run:
@@ -180,5 +178,4 @@ Please read the ["Reference" section](https://developers.google.com/youtube/v3/d
 
 
 ##Credits
-
 Built on code from Madcoda's [php-youtube-api](https://github.com/madcoda/php-youtube-api).
