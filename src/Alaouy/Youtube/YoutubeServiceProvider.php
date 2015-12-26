@@ -48,7 +48,7 @@ class YoutubeServiceProvider extends ServiceProvider
 
         $this->publishes(array(__DIR__ . '/../../config/youtube.php' => config_path('youtube.php')));
 
-        $this->app->bindShared('youtube', function () {
+        $this->app->singleton('youtube', function () {
             return $this->app->make('Alaouy\Youtube\Youtube', [config('youtube.KEY')]);
         });
     }
