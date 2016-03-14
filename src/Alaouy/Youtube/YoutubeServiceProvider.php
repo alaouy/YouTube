@@ -49,7 +49,7 @@ class YoutubeServiceProvider extends ServiceProvider
         $this->publishes(array(__DIR__ . '/../../config/youtube.php' => config_path('youtube.php')));
 
         //Laravel 5.1+ fix
-        if(Str::startsWith(Application::VERSION, "5.1.")){
+        if(floatval(Application::VERSION,10) >= 5.1){
             $this->app->bind("youtube", null, true, function(){
                 return $this->app->make('Alaouy\Youtube\Youtube', [config('youtube.KEY')]);
             });
