@@ -50,7 +50,7 @@ class YoutubeServiceProvider extends ServiceProvider
 
         //Laravel 5.1+ fix
         if(floatval(Application::VERSION) >= 5.1){
-            $this->app->bind("youtube", null, true, function(){
+            $this->app->bind("youtube", function(){
                 return $this->app->make('Alaouy\Youtube\Youtube', [config('youtube.KEY')]);
             });
         }else{
