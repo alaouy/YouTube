@@ -84,7 +84,7 @@ $playlistItems = Youtube::getPlaylistItemsByPlaylistId('PL590L5WQmH8fJ54F369BLDS
 $activities = Youtube::getActivitiesByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
 
 // Retrieve video ID from original YouTube URL
-$videoId =Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk');
+$videoId = Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk');
 // result: moSFlvxnbgk
 ```
 
