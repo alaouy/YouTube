@@ -248,19 +248,34 @@ class Youtube
      * @return array
      * @throws \Exception
      */
-    public function getPlaylistsByChannelId($channelId, $optionalParams = array(), $part = ['id', 'snippet', 'status'])
+    public function getPlaylistsByChannelId($channelId, $pageToken = false, $maxResults = 50, $optionalParams = array(), $part = ['id', 'snippet', 'status'])
     {
         $API_URL = $this->getApi('playlists.list');
         $params = array(
             'channelId' => $channelId,
             'part' => implode(', ', $part),
+            'maxResults' => $maxResults
         );
+
         if ($optionalParams) {
             $params = array_merge($params, $optionalParams);
         }
+
+        // Pass page token if it is given, an empty string won't change the api response
+        if (is_string($pageToken)) {
+            $params['pageToken'] = $pageToken;
+        }
+
         $apiData = $this->api_get($API_URL, $params);
 
-        return $this->decodeList($apiData);
+        $result = ['results' => $this->decodeList($apiData)];
+
+        if (is_string($pageToken) || $pageToken) {
+            $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
+            $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
+        }
+
+        return $result;
     }
 
     /**

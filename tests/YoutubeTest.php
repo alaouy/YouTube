@@ -191,8 +191,8 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
         $response = $this->youtube->getPlaylistsByChannelId($GOOGLE_CHANNELID);
 
         $this->assertTrue(count($response) > 0);
-        $this->assertEquals('youtube#playlist', $response[0]->kind);
-        $this->assertEquals('Google', $response[0]->snippet->channelTitle);
+        $this->assertEquals('youtube#playlist', $response['results'][0]->kind);
+        $this->assertEquals('Google', $response['results'][0]->snippet->channelTitle);
     }
 
     public function testGetPlaylistById()
@@ -200,7 +200,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
         //get one of the playlist
         $GOOGLE_CHANNELID = 'UCK8sQmJBp8GCxrOtXWBpyEA';
         $response = $this->youtube->getPlaylistsByChannelId($GOOGLE_CHANNELID);
-        $playlist = $response[0];
+        $playlist = $response['results'][0];
 
         $response = $this->youtube->getPlaylistById($playlist->id);
         $this->assertEquals('youtube#playlist', $response->kind);
