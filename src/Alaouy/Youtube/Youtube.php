@@ -254,8 +254,7 @@ class Youtube
         $API_URL = $this->getApi('playlists.list');
         $params = array(
             'channelId' => $channelId,
-            'part' => implode(', ', $part),
-            'maxResults' => $maxResults
+            'part' => implode(', ', $part)
         );
 
         if ($optionalParams) {
