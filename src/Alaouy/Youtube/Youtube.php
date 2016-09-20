@@ -243,12 +243,15 @@ class Youtube
     }
 
     /**
-     * @param $channelId
+     * @param string $channelId
+     * @param string $pageToken
+     * @param int $maxResults
      * @param array $optionalParams
+     * @param array $part
      * @return array
      * @throws \Exception
      */
-    public function getPlaylistsByChannelId($channelId, $pageToken = false, $maxResults = 50, $optionalParams = array(), $part = ['id', 'snippet', 'status'])
+    public function getPlaylistsByChannelId($channelId, $pageToken = '', $maxResults = 50, $optionalParams = array(), $part = ['id', 'snippet', 'status'])
     {
         $API_URL = $this->getApi('playlists.list');
         $params = array(
@@ -262,18 +265,14 @@ class Youtube
         }
 
         // Pass page token if it is given, an empty string won't change the api response
-        if (is_string($pageToken)) {
-            $params['pageToken'] = $pageToken;
-        }
+        $params['pageToken'] = $pageToken;
 
         $apiData = $this->api_get($API_URL, $params);
 
         $result = ['results' => $this->decodeList($apiData)];
 
-        if (is_string($pageToken) || $pageToken) {
-            $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
-            $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
-        }
+        $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
+        $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
         return $result;
     }
@@ -296,11 +295,14 @@ class Youtube
     }
 
     /**
-     * @param $playlistId
+     * @param string $playlistId
+     * @param string $pageToken
+     * @param int $maxResults
+     * @param array $part
      * @return array
      * @throws \Exception
      */
-    public function getPlaylistItemsByPlaylistId($playlistId, $pageToken = false, $maxResults = 50, $part = ['id', 'snippet', 'contentDetails', 'status'])
+    public function getPlaylistItemsByPlaylistId($playlistId, $pageToken = '', $maxResults = 50, $part = ['id', 'snippet', 'contentDetails', 'status'])
     {
         $API_URL = $this->getApi('playlistItems.list');
         $params = array(
@@ -310,16 +312,13 @@ class Youtube
         );
 
         // Pass page token if it is given, an empty string won't change the api response
-        if (is_string($pageToken)) {
-            $params['pageToken'] = $pageToken;
-        }
+        $params['pageToken'] = $pageToken;
+
         $apiData = $this->api_get($API_URL, $params);
         $result = ['results' => $this->decodeList($apiData)];
 
-        if (is_string($pageToken) || $pageToken) {
-            $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
-            $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
-        }
+        $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
+        $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
         return $result;
     }
