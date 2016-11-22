@@ -137,9 +137,10 @@ class Youtube
      * @param  string $channelId
      * @param  integer $maxResults
      * @param  string $order
+     * @param  $pageInfo
      * @return object
      */
-    public function searchChannelVideos($q, $channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'])
+    public function searchChannelVideos($q, $channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'], $pageInfo = false)
     {
         $params = array(
             'q' => $q,
@@ -152,7 +153,7 @@ class Youtube
             $params['order'] = $order;
         }
 
-        return $this->searchAdvanced($params);
+        return $this->searchAdvanced($params, $pageInfo);
     }
 
     /**
