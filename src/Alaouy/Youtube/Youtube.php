@@ -320,10 +320,13 @@ class Youtube
 
     /**
      * @param $channelId
+     * @param array $part
+     * @param $maxResults
+     * @param $pageInfo
      * @return array
      * @throws \Exception
      */
-    public function getActivitiesByChannelId($channelId, $part = ['id', 'snippet', 'contentDetails'], $maxResults = 5)
+    public function getActivitiesByChannelId($channelId, $part = ['id', 'snippet', 'contentDetails'], $maxResults = 5, $pageInfo = false)
     {
         if (empty($channelId)) {
             throw new \InvalidArgumentException('ChannelId must be supplied');
@@ -336,7 +339,14 @@ class Youtube
         );
         $apiData = $this->api_get($API_URL, $params);
 
-        return $this->decodeList($apiData);
+        if ($pageInfo) {
+            return array(
+                'results' => $this->decodeList($apiData),
+                'info' => $this->page_info,
+            );
+        } else {
+            return $this->decodeList($apiData);
+        }
     }
 
     /**
