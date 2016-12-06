@@ -265,7 +265,7 @@ class Youtube
         $apiData = $this->api_get($API_URL, $params);
 
         $result = ['results' => $this->decodeList($apiData)];
-
+        $result['info']['totalResults'] =  (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
         $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
         $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
@@ -311,7 +311,7 @@ class Youtube
 
         $apiData = $this->api_get($API_URL, $params);
         $result = ['results' => $this->decodeList($apiData)];
-
+        $result['info']['totalResults'] =  (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
         $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
         $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
