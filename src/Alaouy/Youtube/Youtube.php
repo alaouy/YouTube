@@ -31,7 +31,7 @@ class Youtube
      * Constructor
      * $youtube = new Youtube(array('key' => 'KEY HERE'))
      *
-     * @param array $params
+     * @param string $key
      * @throws \Exception
      */
     public function __construct($key)
@@ -44,7 +44,8 @@ class Youtube
     }
 
     /**
-     * @param $single
+     * @param $vId
+     * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -70,7 +71,8 @@ class Youtube
      * Gets popular videos for a specific region (ISO 3166-1 alpha-2)
      *
      * @param $regionCode
-     * @param int $maxResults
+     * @param integer $maxResults
+     * @param array $part
      * @return array
      */
     public function getPopularVideos($regionCode, $maxResults = 10, $part = ['id', 'snippet', 'contentDetails', 'player', 'statistics', 'status'])
@@ -93,7 +95,8 @@ class Youtube
      * and order by relevance
      *
      * @param $q
-     * @param int $maxResults
+     * @param integer $maxResults
+     * @param array $part
      * @return array
      */
     public function search($q, $maxResults = 10, $part = ['id', 'snippet'])
@@ -113,6 +116,7 @@ class Youtube
      * @param  string $q Query
      * @param  integer $maxResults number of results to return
      * @param  string $order Order by
+     * @param  array $part
      * @return \StdClass  API results
      */
     public function searchVideos($q, $maxResults = 10, $order = null, $part = ['id'])
@@ -137,8 +141,9 @@ class Youtube
      * @param  string $channelId
      * @param  integer $maxResults
      * @param  string $order
+     * @param  array $part
      * @param  $pageInfo
-     * @return object
+     * @return array
      */
     public function searchChannelVideos($q, $channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'], $pageInfo = false)
     {
@@ -205,6 +210,8 @@ class Youtube
 
     /**
      * @param $username
+     * @param $optionalParams
+     * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -225,6 +232,8 @@ class Youtube
 
     /**
      * @param $id
+     * @param $optionalParams
+     * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -274,6 +283,7 @@ class Youtube
 
     /**
      * @param $id
+     * @param $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -292,7 +302,7 @@ class Youtube
     /**
      * @param string $playlistId
      * @param string $pageToken
-     * @param int $maxResults
+     * @param integer $maxResults
      * @param array $part
      * @return array
      * @throws \Exception
@@ -321,7 +331,7 @@ class Youtube
     /**
      * @param $channelId
      * @param array $part
-     * @param $maxResults
+     * @param integer $maxResults
      * @param $pageInfo
      * @param $pageToken
      * @return array
@@ -353,6 +363,8 @@ class Youtube
 
     /**
      * @param  string $videoId
+     * @param  integer $maxResults
+     * @param  array $part
      * @return array
      * @throws \Exception
      */
