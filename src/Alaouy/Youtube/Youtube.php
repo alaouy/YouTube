@@ -162,6 +162,31 @@ class Youtube
     }
 
     /**
+     * List videos in the channel
+     *
+     * @param  string $channelId
+     * @param  integer $maxResults
+     * @param  string $order
+     * @param  array $part
+     * @param  $pageInfo
+     * @return array
+     */
+    public function listChannelVideos($channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'], $pageInfo = false)
+    {
+        $params = array(
+            'type' => 'video',
+            'channelId' => $channelId,
+            'part' => implode(', ', $part),
+            'maxResults' => $maxResults,
+        );
+        if (!empty($order)) {
+            $params['order'] = $order;
+        }
+
+        return $this->searchAdvanced($params, $pageInfo);
+    }
+
+    /**
      * Generic Search interface, use any parameters specified in
      * the API reference
      *
@@ -174,8 +199,8 @@ class Youtube
     {
         $API_URL = $this->getApi('search.list');
 
-        if (empty($params) || !isset($params['q'])) {
-            throw new \InvalidArgumentException('at least the Search query must be supplied');
+        if (empty($params) || (!isset($params['q']) && !isset($params['channelId']))) {
+            throw new \InvalidArgumentException('at least the Search query or Channel ID must be supplied');
         }
 
         $apiData = $this->api_get($API_URL, $params);

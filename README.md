@@ -74,6 +74,9 @@ $videoList = Youtube::searchVideos('Android');
 // Search only videos in a given channel, return an array of PHP objects
 $videoList = Youtube::searchChannelVideos('keyword', 'UCk1SpWNzOs4MYmr0uICEntg', 40);
 
+// List videos in a given channel, return an array of PHP objects
+$videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
+
 $results = Youtube::searchAdvanced(array( /* params */ ));
 
 // Get channel data by channel name, return an STD PHP object
