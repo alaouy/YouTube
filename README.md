@@ -53,6 +53,8 @@ Do not forget to add also Youtube facade there:
 ## Usage
 
 ```php
+// use Alaouy\Youtube\Facades\Youtube;
+
 // Return an STD PHP object
 $video = Youtube::getVideoInfo('rie-hPVJ7Sw');
 
