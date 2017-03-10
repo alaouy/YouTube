@@ -9,19 +9,9 @@ You need to create an application and create your access token in the [developer
 
 ## Installation
 
-Add `alaouy/youtube` to your `composer.json`.
+Run in console below command to download package to your project:
 ```
-"alaouy/youtube": "dev-master"
-```
-
-Run `composer update` to pull down the latest version of the package.
-
-Now open up `app/config/app.php` and add the service provider to your `providers` array.
-
-```php
-'providers' => array(
-	'Alaouy\Youtube\YoutubeServiceProvider',
-)
+composer require alaouy/youtube --prefer-dist dev-master
 ```
 
 ## Configuration
@@ -29,8 +19,19 @@ Now open up `app/config/app.php` and add the service provider to your `providers
 Run `php artisan vendor:publish` and set your API key in the file:
 
 ```
-/app/config/youtube.php
+app/config/youtube.php
 ```
+
+In `config/app.php` add YoutubeServiceProvider:
+```
+Alaouy\Youtube\YoutubeServiceProvider::class,
+```
+
+Do not forget to add also Youtube facade there:
+```
+'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
+```
+
 
 ### For Laravel 4
 Run `php artisan config:publish alaouy/youtube` and set your API key in the file:
@@ -39,9 +40,21 @@ Run `php artisan config:publish alaouy/youtube` and set your API key in the file
 /app/config/packages/alaouy/youtube/config.php
 ```
 
+In `config/app.php` add YoutubeServiceProvider:
+```
+'Alaouy\Youtube\YoutubeServiceProvider',
+```
+
+Do not forget to add also Youtube facade there:
+```
+'Youtube' => 'Alaouy\Youtube\Facades\Youtube',
+```
+
 ## Usage
 
 ```php
+// use Alaouy\Youtube\Facades\Youtube;
+
 // Return an STD PHP object
 $video = Youtube::getVideoInfo('rie-hPVJ7Sw');
 
@@ -62,6 +75,9 @@ $videoList = Youtube::searchVideos('Android');
 
 // Search only videos in a given channel, return an array of PHP objects
 $videoList = Youtube::searchChannelVideos('keyword', 'UCk1SpWNzOs4MYmr0uICEntg', 40);
+
+// List videos in a given channel, return an array of PHP objects
+$videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
 
 $results = Youtube::searchAdvanced(array( /* params */ ));
 

@@ -31,7 +31,7 @@ class Youtube
      * Constructor
      * $youtube = new Youtube(array('key' => 'KEY HERE'))
      *
-     * @param array $params
+     * @param string $key
      * @throws \Exception
      */
     public function __construct($key)
@@ -44,7 +44,8 @@ class Youtube
     }
 
     /**
-     * @param $single
+     * @param $vId
+     * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -70,7 +71,8 @@ class Youtube
      * Gets popular videos for a specific region (ISO 3166-1 alpha-2)
      *
      * @param $regionCode
-     * @param int $maxResults
+     * @param integer $maxResults
+     * @param array $part
      * @return array
      */
     public function getPopularVideos($regionCode, $maxResults = 10, $part = ['id', 'snippet', 'contentDetails', 'player', 'statistics', 'status'])
@@ -93,7 +95,8 @@ class Youtube
      * and order by relevance
      *
      * @param $q
-     * @param int $maxResults
+     * @param integer $maxResults
+     * @param array $part
      * @return array
      */
     public function search($q, $maxResults = 10, $part = ['id', 'snippet'])
@@ -113,6 +116,7 @@ class Youtube
      * @param  string $q Query
      * @param  integer $maxResults number of results to return
      * @param  string $order Order by
+     * @param  array $part
      * @return \StdClass  API results
      */
     public function searchVideos($q, $maxResults = 10, $order = null, $part = ['id'])
@@ -137,9 +141,11 @@ class Youtube
      * @param  string $channelId
      * @param  integer $maxResults
      * @param  string $order
-     * @return object
+     * @param  array $part
+     * @param  $pageInfo
+     * @return array
      */
-    public function searchChannelVideos($q, $channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'])
+    public function searchChannelVideos($q, $channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'], $pageInfo = false)
     {
         $params = array(
             'q' => $q,
@@ -152,7 +158,32 @@ class Youtube
             $params['order'] = $order;
         }
 
-        return $this->searchAdvanced($params);
+        return $this->searchAdvanced($params, $pageInfo);
+    }
+
+    /**
+     * List videos in the channel
+     *
+     * @param  string $channelId
+     * @param  integer $maxResults
+     * @param  string $order
+     * @param  array $part
+     * @param  $pageInfo
+     * @return array
+     */
+    public function listChannelVideos($channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'], $pageInfo = false)
+    {
+        $params = array(
+            'type' => 'video',
+            'channelId' => $channelId,
+            'part' => implode(', ', $part),
+            'maxResults' => $maxResults,
+        );
+        if (!empty($order)) {
+            $params['order'] = $order;
+        }
+
+        return $this->searchAdvanced($params, $pageInfo);
     }
 
     /**
@@ -168,8 +199,8 @@ class Youtube
     {
         $API_URL = $this->getApi('search.list');
 
-        if (empty($params) || !isset($params['q'])) {
-            throw new \InvalidArgumentException('at least the Search query must be supplied');
+        if (empty($params) || (!isset($params['q']) && !isset($params['channelId']))) {
+            throw new \InvalidArgumentException('at least the Search query or Channel ID must be supplied');
         }
 
         $apiData = $this->api_get($API_URL, $params);
@@ -204,6 +235,8 @@ class Youtube
 
     /**
      * @param $username
+     * @param $optionalParams
+     * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -224,6 +257,8 @@ class Youtube
 
     /**
      * @param $id
+     * @param $optionalParams
+     * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -254,8 +289,7 @@ class Youtube
         $API_URL = $this->getApi('playlists.list');
         $params = array(
             'channelId' => $channelId,
-            'part' => implode(', ', $part),
-            'maxResults' => $maxResults
+            'part' => implode(', ', $part)
         );
 
         if ($optionalParams) {
@@ -265,7 +299,7 @@ class Youtube
         $apiData = $this->api_get($API_URL, $params);
 
         $result = ['results' => $this->decodeList($apiData)];
-
+        $result['info']['totalResults'] =  (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
         $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
         $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
@@ -274,6 +308,7 @@ class Youtube
 
     /**
      * @param $id
+     * @param $part
      * @return \StdClass
      * @throws \Exception
      */
@@ -292,7 +327,7 @@ class Youtube
     /**
      * @param string $playlistId
      * @param string $pageToken
-     * @param int $maxResults
+     * @param integer $maxResults
      * @param array $part
      * @return array
      * @throws \Exception
@@ -311,7 +346,7 @@ class Youtube
 
         $apiData = $this->api_get($API_URL, $params);
         $result = ['results' => $this->decodeList($apiData)];
-
+        $result['info']['totalResults'] =  (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
         $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
         $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
@@ -320,10 +355,14 @@ class Youtube
 
     /**
      * @param $channelId
+     * @param array $part
+     * @param integer $maxResults
+     * @param $pageInfo
+     * @param $pageToken
      * @return array
      * @throws \Exception
      */
-    public function getActivitiesByChannelId($channelId, $part = ['id', 'snippet', 'contentDetails'], $maxResults = 5)
+    public function getActivitiesByChannelId($channelId, $part = ['id', 'snippet', 'contentDetails'], $maxResults = 5, $pageInfo = false, $pageToken = '')
     {
         if (empty($channelId)) {
             throw new \InvalidArgumentException('ChannelId must be supplied');
@@ -333,14 +372,24 @@ class Youtube
             'channelId' => $channelId,
             'part' => implode(', ', $part),
             'maxResults' => $maxResults,
+            'pageToken' => $pageToken,
         );
         $apiData = $this->api_get($API_URL, $params);
 
-        return $this->decodeList($apiData);
+        if ($pageInfo) {
+            return array(
+                'results' => $this->decodeList($apiData),
+                'info' => $this->page_info,
+            );
+        } else {
+            return $this->decodeList($apiData);
+        }
     }
 
     /**
      * @param  string $videoId
+     * @param  integer $maxResults
+     * @param  array $part
      * @return array
      * @throws \Exception
      */

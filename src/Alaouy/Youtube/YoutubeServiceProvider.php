@@ -28,6 +28,7 @@ class YoutubeServiceProvider extends ServiceProvider
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Youtube', 'Alaouy\Youtube\Facades\Youtube');
+        $this->publishes(array(__DIR__ . '/../../config/youtube.php' => config_path('youtube.php')));
     }
 
     /**
@@ -46,10 +47,11 @@ class YoutubeServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->publishes(array(__DIR__ . '/../../config/youtube.php' => config_path('youtube.php')));
-
-        //Laravel 5.1+ fix
-        if(floatval(Application::VERSION) >= 5.1){
+        if (floatval(Application::VERSION) >= 5.4) {
+            $this->app->bind("youtube", function(){
+                return new Youtube(config('youtube.KEY'));
+            });
+        } elseif(floatval(Application::VERSION) >= 5.1) { //Laravel 5.1+ fix
             $this->app->bind("youtube", function(){
                 return $this->app->make('Alaouy\Youtube\Youtube', [config('youtube.KEY')]);
             });
