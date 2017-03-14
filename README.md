@@ -16,13 +16,7 @@ composer require alaouy/youtube --prefer-dist dev-master
 
 ## Configuration
 ### For Laravel 5
-Run `php artisan vendor:publish` and set your API key in the file:
-
-```
-app/config/youtube.php
-```
-
-In `config/app.php` add YoutubeServiceProvider:
+In `/config/app.php` add YoutubeServiceProvider:
 ```
 Alaouy\Youtube\YoutubeServiceProvider::class,
 ```
@@ -32,15 +26,19 @@ Do not forget to add also Youtube facade there:
 'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
 ```
 
+Publish config settings:
+```
+php artisan vendor:publish
+```
+
+Set your Youtube API key in the file:
+
+```
+/config/youtube.php
+```
 
 ### For Laravel 4
-Run `php artisan config:publish alaouy/youtube` and set your API key in the file:
-
-```
-/app/config/packages/alaouy/youtube/config.php
-```
-
-In `config/app.php` add YoutubeServiceProvider:
+In `/app/config/app.php` add YoutubeServiceProvider:
 ```
 'Alaouy\Youtube\YoutubeServiceProvider',
 ```
@@ -48,6 +46,17 @@ In `config/app.php` add YoutubeServiceProvider:
 Do not forget to add also Youtube facade there:
 ```
 'Youtube' => 'Alaouy\Youtube\Facades\Youtube',
+```
+
+Publish config settings:
+```
+php artisan config:publish alaouy/youtube
+```
+
+Set your Youtube API key in the file:
+
+```
+/app/config/packages/alaouy/youtube/config.php
 ```
 
 ## Usage
