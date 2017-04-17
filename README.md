@@ -202,5 +202,5 @@ Please read the ["Reference" section](https://developers.google.com/youtube/v3/d
 - [Obtain API key from Google API Console](https://console.developers.google.com)
 
 
-##Credits
+## Credits
 Built on code from Madcoda's [php-youtube-api](https://github.com/madcoda/php-youtube-api).
