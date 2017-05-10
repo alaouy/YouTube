@@ -266,13 +266,17 @@ class Youtube
     {
         $API_URL = $this->getApi('channels.list');
         $params = array(
-            'id' => $id,
+            'id' => is_array($id) ? implode(',', $id) : $id,
             'part' => implode(', ', $part),
         );
         if ($optionalParams) {
             $params = array_merge($params, $optionalParams);
         }
         $apiData = $this->api_get($API_URL, $params);
+
+        if (is_array($id)) {
+            return $this->decodeMultiple($apiData);
+        }
 
         return $this->decodeSingle($apiData);
     }
