@@ -1,24 +1,20 @@
 <?php
 
-namespace Alaouy\Tests;
-
-require_once __DIR__ . '/../vendor/autoload.php';
+namespace Alaouy\Youtube\Tests;
 
 use Alaouy\Youtube\Youtube;
+use PHPUnit\Framework\TestCase;
 
-class YoutubeTest extends \PHPUnit_Framework_TestCase
+class YoutubeTest extends TestCase
 {
-    /**
-     *
-     *
-     * @var Youtube
-     */
+    const TEST_API_KEY = 'AIzaSyBPmiEELU0YEH90N2wU2sYeDvrJIoB1tqc';
+
+    /** @var Youtube */
     public $youtube;
 
     public function setUp()
     {
-        $TEST_API_KEY = 'AIzaSyDDefsgXEZu57wYgABF7xEURClu4UAzyB8';
-        $this->youtube = new Youtube($TEST_API_KEY);
+        $this->youtube = new Youtube(self::TEST_API_KEY);
     }
 
     public function tearDown()
@@ -26,17 +22,15 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
         $this->youtube = null;
     }
 
-    public function MalFormURLProvider()
+    public function urlProvider()
     {
-        return array(
-            array('https://'),
-            array('http://www.yuotube.com'),
-        );
+        return [
+            ['https://'],
+            ['http://www.yuotube.com'],
+        ];
     }
 
     /**
-     *
-     *
      * @expectedException \Exception
      */
     public function testConstructorFail()
@@ -45,8 +39,6 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
-     *
      * @expectedException \Exception
      */
     public function testConstructorFail2()
@@ -55,8 +47,6 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
-     *
      * @expectedException \Exception
      */
     public function testInvalidApiKey()
@@ -244,9 +234,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
-     *
-     * @dataProvider MalFormURLProvider
+     * @dataProvider urlProvider
      * @expectedException \Exception
      */
     public function testParseVIdFromURLException($url)
@@ -255,8 +243,6 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
-     *
      * @expectedException \Exception
      */
     public function testParseVIdException()
