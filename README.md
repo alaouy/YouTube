@@ -37,7 +37,13 @@ Set your Youtube API key in the file:
 /config/youtube.php
 ```
 
-### For Laravel 4
+### For Laravel 4 / < PHP7
+
+Add `alaouy/youtube` to your `composer.json`.
+```
+"alaouy/youtube": "1.2.4"
+```
+
 In `/app/config/app.php` add YoutubeServiceProvider:
 ```
 'Alaouy\Youtube\YoutubeServiceProvider',
