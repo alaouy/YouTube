@@ -24,6 +24,5 @@
     "psr-4": {
       "Alaouy\\Youtube\\Tests\\": "tests"
     }
-  },
-  "minimum-stability": "dev"
+  }
 }
