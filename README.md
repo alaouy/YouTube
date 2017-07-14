@@ -5,17 +5,23 @@ Youtube
 
 Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 
-You need to create an application and create your access token in the [developer console](https://console.developers.google.com).
+## Requirements
+
+- PHP 7.0 or higher
+- Laravel 5.1 or higher
+- Access token from [Google Console](https://console.developers.google.com)
+
+Looking for Youtube Package for either of these: PHP 5, Laravel 5.0, Laravel 4? Visit the [`php5-branch`](https://github.com/alaouy/Youtube/tree/php5)
 
 ## Installation
 
 Run in console below command to download package to your project:
 ```
-composer require alaouy/youtube --prefer-dist dev-master
+composer require alaouy/youtube
 ```
 
 ## Configuration
-### For Laravel 5
+
 In `/config/app.php` add YoutubeServiceProvider:
 ```
 Alaouy\Youtube\YoutubeServiceProvider::class,
@@ -28,7 +34,7 @@ Do not forget to add also Youtube facade there:
 
 Publish config settings:
 ```
-php artisan vendor:publish
+$ php artisan vendor:publish
 ```
 
 Set your Youtube API key in the file:
@@ -37,33 +43,6 @@ Set your Youtube API key in the file:
 /config/youtube.php
 ```
 
-### For Laravel 4 / < PHP7
-
-Add `alaouy/youtube` to your `composer.json`.
-```
-"alaouy/youtube": "1.2.4"
-```
-
-In `/app/config/app.php` add YoutubeServiceProvider:
-```
-'Alaouy\Youtube\YoutubeServiceProvider',
-```
-
-Do not forget to add also Youtube facade there:
-```
-'Youtube' => 'Alaouy\Youtube\Facades\Youtube',
-```
-
-Publish config settings:
-```
-php artisan config:publish alaouy/youtube
-```
-
-Set your Youtube API key in the file:
-
-```
-/app/config/packages/alaouy/youtube/config.php
-```
 
 ## Usage
 
