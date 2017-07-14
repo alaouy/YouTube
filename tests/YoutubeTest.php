@@ -56,7 +56,7 @@ class YoutubeTest extends TestCase
         $this->youtube->getVideoInfo($vID);
     }
 
-    public function testGetCategoriesInfo()
+    public function testGetCategories()
     {
         $region = 'US';
         $response = $this->youtube->getCategories($region);
