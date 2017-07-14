@@ -56,6 +56,18 @@ class YoutubeTest extends TestCase
         $this->youtube->getVideoInfo($vID);
     }
 
+    public function testGetCategoriesInfo()
+    {
+        $region = 'US';
+        $response = $this->youtube->getCategories($region);
+
+        $this->assertNotNull('response');
+        $this->assertEquals('youtube#videoCategory', $response[0]->kind);
+        //add all these assertions here in case the api is changed,
+        //we can detect it instantly
+        $this->assertObjectHasAttribute('snippet', $response);
+    }
+
     public function testGetVideoInfo()
     {
         $vID = 'rie-hPVJ7Sw';
