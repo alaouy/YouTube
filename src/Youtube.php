@@ -14,6 +14,7 @@ class Youtube
      * @var array
      */
     public $APIs = array(
+        'categories.list' => 'https://www.googleapis.com/youtube/v3/videoCategories',
         'videos.list' => 'https://www.googleapis.com/youtube/v3/videos',
         'search.list' => 'https://www.googleapis.com/youtube/v3/search',
         'channels.list' => 'https://www.googleapis.com/youtube/v3/channels',
@@ -41,6 +42,24 @@ class Youtube
         } else {
             throw new \Exception('Google API key is Required, please visit https://console.developers.google.com/');
         }
+    }
+
+    /**
+     * @param $regionCode
+     * @return \StdClass
+     * @throws \Exception
+     */
+    public function getCategories($regionCode = 'US', $part = ['snippet'])
+    {
+        $API_URL = $this->getApi('categories.list');
+        $params = array(
+            'key' => $this->youtube_key,
+            'part' => implode(', ', $part),
+            'regionCode' => $regionCode
+        );
+
+        $apiData = $this->api_get($API_URL, $params);
+        return $this->decodeMultiple($apiData);
     }
 
     /**
