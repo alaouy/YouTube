@@ -11,7 +11,7 @@ You need to create an application and create your access token in the [developer
 
 Run in console below command to download package to your project:
 ```
-composer require alaouy/youtube --prefer-dist dev-master
+composer require alaouy/youtube --prefer-dist 1.*
 ```
 
 ## Configuration
@@ -28,7 +28,7 @@ Do not forget to add also Youtube facade there:
 
 Publish config settings:
 ```
-php artisan vendor:publish
+$ php artisan vendor:publish
 ```
 
 Set your Youtube API key in the file:
@@ -50,7 +50,7 @@ Do not forget to add also Youtube facade there:
 
 Publish config settings:
 ```
-php artisan config:publish alaouy/youtube
+$ php artisan config:publish alaouy/youtube
 ```
 
 Set your Youtube API key in the file:
