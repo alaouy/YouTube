@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class YoutubeTest extends TestCase
 {
-    const TEST_API_KEY = 'AIzaSyBPmiEELU0YEH90N2wU2sYeDvrJIoB1tqc';
+    const TEST_API_KEY = 'AIzaSyDDefsgXEZu57wYgABF7xEURClu4UAzyB8';
 
     /** @var Youtube */
     public $youtube;
