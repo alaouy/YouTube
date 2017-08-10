@@ -34,7 +34,7 @@ Do not forget to add also Youtube facade there:
 
 Publish config settings:
 ```
-$ php artisan vendor:publish
+$ php artisan vendor:publish --provider="Alaouy\Youtube\YoutubeServiceProvider"
 ```
 
 Set your Youtube API key in the file:
