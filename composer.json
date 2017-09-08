@@ -24,5 +24,15 @@
     "psr-4": {
       "Alaouy\\Youtube\\Tests\\": "tests"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Alaouy\\Youtube\\YoutubeServiceProvider"
+      ],
+      "aliases": {
+        "Youtube": "Alaouy\\Youtube\\Facades\\Youtube"
+      }
+    }
   }
 }
