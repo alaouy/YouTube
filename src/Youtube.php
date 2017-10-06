@@ -219,7 +219,7 @@ class Youtube
         $API_URL = $this->getApi('search.list');
 
         if (empty($params) || (!isset($params['q']) && !isset($params['channelId']) && !isset($params['videoCategoryId']))) {
-            throw new \InvalidArgumentException('at least the Search query or Channel ID must be supplied');
+            throw new \InvalidArgumentException('at least the Search query or Channel ID or videoCategoryId must be supplied');
         }
 
         $apiData = $this->api_get($API_URL, $params);
