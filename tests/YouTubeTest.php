@@ -1,20 +1,20 @@
 <?php
 
-namespace Alaouy\Youtube\Tests;
+namespace Alaouy\YouTube\Tests;
 
-use Alaouy\Youtube\Youtube;
+use Alaouy\YouTube\YouTube;
 use PHPUnit\Framework\TestCase;
 
-class YoutubeTest extends TestCase
+class YouTubeTest extends TestCase
 {
     const TEST_API_KEY = 'AIzaSyDDefsgXEZu57wYgABF7xEURClu4UAzyB8';
 
-    /** @var Youtube */
+    /** @var YouTube */
     public $youtube;
 
     public function setUp()
     {
-        $this->youtube = new Youtube(self::TEST_API_KEY);
+        $this->youtube = new YouTube(self::TEST_API_KEY);
     }
 
     public function tearDown()
@@ -35,7 +35,7 @@ class YoutubeTest extends TestCase
      */
     public function testConstructorFail()
     {
-        $this->youtube = new Youtube(array());
+        $this->youtube = new YouTube(array());
     }
 
     /**
@@ -43,7 +43,7 @@ class YoutubeTest extends TestCase
      */
     public function testConstructorFail2()
     {
-        $this->youtube = new Youtube('');
+        $this->youtube = new YouTube('');
     }
 
     /**
@@ -51,7 +51,7 @@ class YoutubeTest extends TestCase
      */
     public function testInvalidApiKey()
     {
-        $this->youtube = new Youtube(array('key' => 'nonsense'));
+        $this->youtube = new YouTube(array('key' => 'nonsense'));
         $vID = 'rie-hPVJ7Sw';
         $this->youtube->getVideoInfo($vID);
     }

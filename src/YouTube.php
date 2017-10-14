@@ -1,8 +1,8 @@
 <?php
 
-namespace Alaouy\Youtube;
+namespace Alaouy\YouTube;
 
-class Youtube
+class YouTube
 {
 
     /**
@@ -30,7 +30,7 @@ class Youtube
 
     /**
      * Constructor
-     * $youtube = new Youtube(['key' => 'KEY HERE'])
+     * $youtube = new YouTube(['key' => 'KEY HERE'])
      *
      * @param string $key
      * @throws \Exception
@@ -457,7 +457,7 @@ class Youtube
             $vid = substr($path, 1);
             return $vid;
         } else {
-            throw new \Exception('The supplied URL does not look like a Youtube URL');
+            throw new \Exception('The supplied URL does not look like a YouTube URL');
         }
     }
 
@@ -471,7 +471,7 @@ class Youtube
     public function getChannelFromURL($youtube_url)
     {
         if (strpos($youtube_url, 'youtube.com') === false) {
-            throw new \Exception('The supplied URL does not look like a Youtube URL');
+            throw new \Exception('The supplied URL does not look like a YouTube URL');
         }
 
         $path = static::_parse_url_path($youtube_url);
@@ -484,7 +484,7 @@ class Youtube
             $username = $segments[count($segments) - 1];
             $channel = $this->getChannelByName($username);
         } else {
-            throw new \Exception('The supplied URL does not look like a Youtube Channel URL');
+            throw new \Exception('The supplied URL does not look like a YouTube Channel URL');
         }
 
         return $channel;
@@ -509,7 +509,7 @@ class Youtube
      *
      * @param  string $apiData the api response from youtube
      * @throws \Exception
-     * @return \StdClass  an Youtube resource object
+     * @return \StdClass  an YouTube resource object
      */
     public function decodeSingle(&$apiData)
     {
@@ -536,7 +536,7 @@ class Youtube
      *
      * @param  string $apiData the api response from youtube
      * @throws \Exception
-     * @return \StdClass  an Youtube resource object
+     * @return \StdClass  an YouTube resource object
      */
     public function decodeMultiple(&$apiData)
     {
