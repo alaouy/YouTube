@@ -1,10 +1,10 @@
 <?php
 
-namespace Alaouy\Youtube;
+namespace Alaouy\YouTube;
 
 use Illuminate\Support\ServiceProvider;
 
-class YoutubeServiceProvider extends ServiceProvider
+class YouTubeServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application events.
@@ -24,7 +24,7 @@ class YoutubeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('youtube', function () {
-            return new Youtube(config('youtube.key'));
+            return new YouTube(config('youtube.key'));
         });
     }
 
@@ -35,6 +35,6 @@ class YoutubeServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [Youtube::class];
+        return [YouTube::class];
     }
 }

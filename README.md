@@ -1,9 +1,9 @@
-Youtube
+YouTube
 =========
 
-![Travis Youtube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master)
+![Travis YouTube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master)
 
-Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
+Laravel PHP Facade/Wrapper for the YouTube Data API v3 ( Non-OAuth )
 
 ## Requirements
 
@@ -11,7 +11,7 @@ Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 - Laravel 5.1 or higher
 - API key from [Google Console](https://console.developers.google.com)
 
-Looking for Youtube Package for either of these: PHP 5, Laravel 5.0, Laravel 4? Visit the [`php5-branch`](https://github.com/alaouy/Youtube/tree/php5)
+Looking for YouTube Package for either of these: PHP 5, Laravel 5.0, Laravel 4? Visit the [`php5-branch`](https://github.com/alaouy/Youtube/tree/php5)
 
 ## Installation
 
@@ -22,22 +22,22 @@ composer require alaouy/youtube
 
 ## Configuration
 
-In `/config/app.php` add YoutubeServiceProvider:
+In `/config/app.php` add YouTubeServiceProvider:
 ```
-Alaouy\Youtube\YoutubeServiceProvider::class,
+Alaouy\YouTube\YouTubeServiceProvider::class,
 ```
 
-Do not forget to add also Youtube facade there:
+Do not forget to add also YouTube facade there:
 ```
-'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
+'YouTube' => Alaouy\YouTube\Facades\YouTube::class,
 ```
 
 Publish config settings:
 ```
-$ php artisan vendor:publish --provider="Alaouy\Youtube\YoutubeServiceProvider"
+$ php artisan vendor:publish --provider="Alaouy\YouTube\YouTubeServiceProvider"
 ```
 
-Set your Youtube API key in the file:
+Set your YouTube API key in the file:
 
 ```
 /config/youtube.php
@@ -47,54 +47,54 @@ Set your Youtube API key in the file:
 ## Usage
 
 ```php
-// use Alaouy\Youtube\Facades\Youtube;
+// use Alaouy\YouTube\Facades\YouTube;
 
 // Return an STD PHP object
-$video = Youtube::getVideoInfo('rie-hPVJ7Sw');
+$video = YouTube::getVideoInfo('rie-hPVJ7Sw');
 
 // Get multiple videos info from an array
-$videoList = Youtube::getVideoInfo(['rie-hPVJ7Sw','iKHTawgyKWQ']);
+$videoList = YouTube::getVideoInfo(['rie-hPVJ7Sw','iKHTawgyKWQ']);
 
 // Get multiple videos related to a video
-$relatedVideos = Youtube::getRelatedVideos('iKHTawgyKWQ');
+$relatedVideos = YouTube::getRelatedVideos('iKHTawgyKWQ');
 
 // Get popular videos in a country, return an array of PHP objects
-$videoList = Youtube::getPopularVideos('us');
+$videoList = YouTube::getPopularVideos('us');
 
 // Search playlists, channels and videos. return an array of PHP objects
-$results = Youtube::search('Android');
+$results = YouTube::search('Android');
 
 // Only search videos, return an array of PHP objects
-$videoList = Youtube::searchVideos('Android');
+$videoList = YouTube::searchVideos('Android');
 
 // Search only videos in a given channel, return an array of PHP objects
-$videoList = Youtube::searchChannelVideos('keyword', 'UCk1SpWNzOs4MYmr0uICEntg', 40);
+$videoList = YouTube::searchChannelVideos('keyword', 'UCk1SpWNzOs4MYmr0uICEntg', 40);
 
 // List videos in a given channel, return an array of PHP objects
-$videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
+$videoList = YouTube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
 
-$results = Youtube::searchAdvanced(array( /* params */ ));
+$results = YouTube::searchAdvanced(array( /* params */ ));
 
 // Get channel data by channel name, return an STD PHP object
-$channel = Youtube::getChannelByName('xdadevelopers');
+$channel = YouTube::getChannelByName('xdadevelopers');
 
 // Get channel data by channel ID, return an STD PHP object
-$channel = Youtube::getChannelById('UCk1SpWNzOs4MYmr0uICEntg');
+$channel = YouTube::getChannelById('UCk1SpWNzOs4MYmr0uICEntg');
 
 // Get playlist by ID, return an STD PHP object
-$playlist = Youtube::getPlaylistById('PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs');
+$playlist = YouTube::getPlaylistById('PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs');
 
 // Get playlist by channel ID, return an array of PHP objects
-$playlists = Youtube::getPlaylistsByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
+$playlists = YouTube::getPlaylistsByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
 
 // Get items in a playlist by playlist ID, return an array of PHP objects
-$playlistItems = Youtube::getPlaylistItemsByPlaylistId('PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs');
+$playlistItems = YouTube::getPlaylistItemsByPlaylistId('PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs');
 
 // Get channel activities by channel ID, return an array of PHP objects
-$activities = Youtube::getActivitiesByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
+$activities = YouTube::getActivitiesByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
 
 // Retrieve video ID from original YouTube URL
-$videoId = Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk');
+$videoId = YouTube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk');
 // result: moSFlvxnbgk
 ```
 
@@ -110,7 +110,7 @@ $params = array(
 );
 
 // Make intial call. with second argument to reveal page info such as page tokens
-$search = Youtube::searchAdvanced($params, true);
+$search = YouTube::searchAdvanced($params, true);
 
 // Check if we have a pageToken
 if (isset($search['info']['nextPageToken'])) {
@@ -118,7 +118,7 @@ if (isset($search['info']['nextPageToken'])) {
 }
 
 // Make another call and repeat
-$search = Youtube::searchAdvanced($params, true);
+$search = YouTube::searchAdvanced($params, true);
 
 // Add results key with info parameter set
 print_r($search['results']);
@@ -137,25 +137,25 @@ $params = array(
 $pageTokens = array();
 
 // Make inital search
-$search = Youtube::paginateResults($params, null);
+$search = YouTube::paginateResults($params, null);
 
 // Store token
 $pageTokens[] = $search['info']['nextPageToken'];
 
 // Go to next page in result
-$search = Youtube::paginateResults($params, $pageTokens[0]);
+$search = YouTube::paginateResults($params, $pageTokens[0]);
 
 // Store token
 $pageTokens[] = $search['info']['nextPageToken'];
 
 // Go to next page in result
-$search = Youtube::paginateResults($params, $pageTokens[1]);
+$search = YouTube::paginateResults($params, $pageTokens[1]);
 
 // Store token
 $pageTokens[] = $search['info']['nextPageToken'];
 
 // Go back a page
-$search = Youtube::paginateResults($params, $pageTokens[0]);
+$search = YouTube::paginateResults($params, $pageTokens[0]);
 
 // Add results key with info parameter set
 print_r($search['results']);
@@ -182,8 +182,8 @@ The returned JSON is decoded as PHP objects (not Array).
 Please read the ["Reference" section](https://developers.google.com/youtube/v3/docs/) of the Official API doc.
 
 
-## Youtube Data API v3
-- [Youtube Data API v3 Doc](https://developers.google.com/youtube/v3/)
+## YouTube Data API v3
+- [YouTube Data API v3 Doc](https://developers.google.com/youtube/v3/)
 - [Obtain API key from Google API Console](https://console.developers.google.com)
 
 

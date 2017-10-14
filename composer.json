@@ -1,6 +1,6 @@
 {
   "name": "alaouy/youtube",
-  "description": "Laravel PHP Facade/Wrapper for the Youtube Data API v3",
+  "description": "Laravel PHP Facade/Wrapper for the YouTube Data API v3",
   "keywords": ["youtube", "api", "video", "laravel", "alaouy"],
   "license": "MIT",
   "authors": [
@@ -17,21 +17,21 @@
   },
   "autoload": {
     "psr-4": {
-      "Alaouy\\Youtube\\": "src"
+      "Alaouy\\YouTube\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Alaouy\\Youtube\\Tests\\": "tests"
+      "Alaouy\\YouTube\\Tests\\": "tests"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Alaouy\\Youtube\\YoutubeServiceProvider"
+        "Alaouy\\YouTube\\YouTubeServiceProvider"
       ],
       "aliases": {
-        "Youtube": "Alaouy\\Youtube\\Facades\\Youtube"
+        "YouTube": "Alaouy\\YouTube\\Facades\\YouTube"
       }
     }
   }
