@@ -43,6 +43,11 @@ Set your Youtube API key in the file:
 /config/youtube.php
 ```
 
+Or in the .env file
+```
+YOUTUBE_API_KEY = KEY
+```
+
 
 ## Usage
 
