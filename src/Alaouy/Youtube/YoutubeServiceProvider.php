@@ -28,7 +28,10 @@ class YoutubeServiceProvider extends ServiceProvider
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Youtube', 'Alaouy\Youtube\Facades\Youtube');
-        $this->publishes(array(__DIR__ . '/../../config/youtube.php' => config_path('youtube.php')));
+
+        if (!$this->isLegacyLaravel() && !$this->isOldLaravel()) {
+            $this->publishes(array(__DIR__ . '/../../config/youtube.php' => config_path('youtube.php')));
+        }
     }
 
     /**
