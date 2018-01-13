@@ -46,6 +46,13 @@ class YoutubeTest extends TestCase
         $this->youtube = new Youtube('');
     }
 
+    public function testSetApiKey()
+    {
+        $this->youtube->setApiKey('new_api_key');
+
+        $this->assertEquals($this->youtube->getApiKey(), 'new_api_key');
+    }
+
     /**
      * @expectedException \Exception
      */

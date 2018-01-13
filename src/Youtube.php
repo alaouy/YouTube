@@ -45,6 +45,25 @@ class Youtube
     }
 
     /**
+     * @param $key
+     * @return Youtube
+     */
+    public function setApiKey($key)
+    {
+        $this->youtube_key = $key;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->youtube_key;
+    }
+
+    /**
      * @param $regionCode
      * @return \StdClass
      * @throws \Exception
