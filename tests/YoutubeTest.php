@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class YoutubeTest extends TestCase
 {
-    const TEST_API_KEY = 'AIzaSyDDefsgXEZu57wYgABF7xEURClu4UAzyB8';
+    const TEST_API_KEY = 'AIzaSyCOz5Yml_mICULfhM0s_u87l4MRvcL7_p0';
 
     /** @var Youtube */
     public $youtube;
@@ -310,11 +310,12 @@ class YoutubeTest extends TestCase
 
     /**
      * Test skipped for now, since the API returns Error 500
+     * @expectedException \Exception
      */
     public function testNotFoundAPICall2()
     {
-        //$channelId = 'non_exist_channelid';
-        //$response = $this->youtube->getPlaylistsByChannelId($channelId);
-        //$this->assertFalse($response);
+        $channelId = 'non_exist_channelid';
+        $response = $this->youtube->getPlaylistsByChannelId($channelId);
+        $this->assertEquals($response->getStatusCode(), 404);
     }
 }
