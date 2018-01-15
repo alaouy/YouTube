@@ -48,6 +48,10 @@ Or in the .env file
 YOUTUBE_API_KEY = KEY
 ```
 
+Or you can set the key programmatically at run time :
+```
+Youtube::setApiKey('KEY');
+```
 
 ## Usage
 
