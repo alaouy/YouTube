@@ -93,6 +93,9 @@ $channel = Youtube::getChannelById('UCk1SpWNzOs4MYmr0uICEntg');
 // Get playlist by ID, return an STD PHP object
 $playlist = Youtube::getPlaylistById('PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs');
 
+// Get playlists by multiple ID's, return an array of STD PHP objects
+$playlists = Youtube::getPlaylistById(['PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs', 'PL590L5WQmH8cUsRyHkk1cPGxW0j5kmhm0']);
+
 // Get playlist by channel ID, return an array of PHP objects
 $playlists = Youtube::getPlaylistsByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
 

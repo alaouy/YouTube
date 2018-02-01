@@ -225,6 +225,18 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#playlist', $response->kind);
     }
 
+    public function testGetPlaylistByMultipleIds()
+    {
+        //get one of the playlist
+        $GOOGLE_CHANNELID = 'UCK8sQmJBp8GCxrOtXWBpyEA';
+        $response = $this->youtube->getPlaylistsByChannelId($GOOGLE_CHANNELID);
+        $playlists = $response['results'];
+
+        $response = $this->youtube->getPlaylistById([$playlists[0]->id, $playlists[1]->id]);
+        $this->assertEquals('youtube#playlist', $response[0]->kind);
+        $this->assertEquals('youtube#playlist', $response[1]->kind);
+    }
+
     public function testGetPlaylistItemsByPlaylistId()
     {
         $GOOGLE_ZEITGEIST_PLAYLIST = 'PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs';
