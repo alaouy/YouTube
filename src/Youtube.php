@@ -358,10 +358,14 @@ class Youtube
     {
         $API_URL = $this->getApi('playlists.list');
         $params = [
-            'id' => $id,
+            'id' => is_array($id)? implode(',', $id) : $id,
             'part' => implode(', ', $part),
         ];
         $apiData = $this->api_get($API_URL, $params);
+
+        if (is_array($id)) {
+            return $this->decodeMultiple($apiData);
+        }
 
         return $this->decodeSingle($apiData);
     }
