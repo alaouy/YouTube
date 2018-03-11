@@ -23,9 +23,11 @@ class YoutubeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('youtube', function () {
+        $this->app->bind(Youtube::class, function () {
             return new Youtube(config('youtube.key'));
         });
+
+        $this->app->alias(Youtube::class, 'youtube');
     }
 
     /**
