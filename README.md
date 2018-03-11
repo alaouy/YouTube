@@ -43,6 +43,15 @@ Set your Youtube API key in the file:
 /config/youtube.php
 ```
 
+Or in the .env file
+```
+YOUTUBE_API_KEY = KEY
+```
+
+Or you can set the key programmatically at run time :
+```
+Youtube::setApiKey('KEY');
+```
 
 ## Usage
 
@@ -73,7 +82,7 @@ $videoList = Youtube::searchChannelVideos('keyword', 'UCk1SpWNzOs4MYmr0uICEntg',
 // List videos in a given channel, return an array of PHP objects
 $videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
 
-$results = Youtube::searchAdvanced(array( /* params */ ));
+$results = Youtube::searchAdvanced([ /* params */ ]);
 
 // Get channel data by channel name, return an STD PHP object
 $channel = Youtube::getChannelByName('xdadevelopers');
@@ -83,6 +92,9 @@ $channel = Youtube::getChannelById('UCk1SpWNzOs4MYmr0uICEntg');
 
 // Get playlist by ID, return an STD PHP object
 $playlist = Youtube::getPlaylistById('PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs');
+
+// Get playlists by multiple ID's, return an array of STD PHP objects
+$playlists = Youtube::getPlaylistById(['PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs', 'PL590L5WQmH8cUsRyHkk1cPGxW0j5kmhm0']);
 
 // Get playlist by channel ID, return an array of PHP objects
 $playlists = Youtube::getPlaylistsByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
@@ -102,12 +114,12 @@ $videoId = Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk
 
 ```php
 // Set default parameters
-$params = array(
+$params = [
     'q'             => 'Android',
     'type'          => 'video',
     'part'          => 'id, snippet',
     'maxResults'    => 50
-);
+];
 
 // Make intial call. with second argument to reveal page info such as page tokens
 $search = Youtube::searchAdvanced($params, true);
@@ -126,15 +138,15 @@ print_r($search['results']);
 /* Alternative approach with new built-in paginateResults function */
 
 // Same params as before
-$params = array(
+$params = [
     'q'             => 'Android',
     'type'          => 'video',
     'part'          => 'id, snippet',
     'maxResults'    => 50
-);
+];
 
 // An array to store page tokens so we can go back and forth
-$pageTokens = array();
+$pageTokens = [];
 
 // Make inital search
 $search = Youtube::paginateResults($params, null);

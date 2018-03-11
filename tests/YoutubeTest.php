@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class YoutubeTest extends TestCase
 {
-    const TEST_API_KEY = 'AIzaSyDDefsgXEZu57wYgABF7xEURClu4UAzyB8';
+    const TEST_API_KEY = 'AIzaSyCOz5Yml_mICULfhM0s_u87l4MRvcL7_p0';
 
     /** @var Youtube */
     public $youtube;
@@ -44,6 +44,13 @@ class YoutubeTest extends TestCase
     public function testConstructorFail2()
     {
         $this->youtube = new Youtube('');
+    }
+
+    public function testSetApiKey()
+    {
+        $this->youtube->setApiKey('new_api_key');
+
+        $this->assertEquals($this->youtube->getApiKey(), 'new_api_key');
     }
 
     /**
@@ -218,6 +225,18 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#playlist', $response->kind);
     }
 
+    public function testGetPlaylistByMultipleIds()
+    {
+        //get one of the playlist
+        $GOOGLE_CHANNELID = 'UCK8sQmJBp8GCxrOtXWBpyEA';
+        $response = $this->youtube->getPlaylistsByChannelId($GOOGLE_CHANNELID);
+        $playlists = $response['results'];
+
+        $response = $this->youtube->getPlaylistById([$playlists[0]->id, $playlists[1]->id]);
+        $this->assertEquals('youtube#playlist', $response[0]->kind);
+        $this->assertEquals('youtube#playlist', $response[1]->kind);
+    }
+
     public function testGetPlaylistItemsByPlaylistId()
     {
         $GOOGLE_ZEITGEIST_PLAYLIST = 'PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs';
@@ -303,11 +322,12 @@ class YoutubeTest extends TestCase
 
     /**
      * Test skipped for now, since the API returns Error 500
+     * @expectedException \Exception
      */
     public function testNotFoundAPICall2()
     {
-        //$channelId = 'non_exist_channelid';
-        //$response = $this->youtube->getPlaylistsByChannelId($channelId);
-        //$this->assertFalse($response);
+        $channelId = 'non_exist_channelid';
+        $response = $this->youtube->getPlaylistsByChannelId($channelId);
+        $this->assertEquals($response->getStatusCode(), 404);
     }
 }
