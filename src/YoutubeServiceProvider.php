@@ -13,7 +13,11 @@ class YoutubeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__ . '/config/youtube.php' => config_path('youtube.php')]);
+        $source = realpath(__DIR__ . '/config/youtube.php');
+
+        $this->publishes([$source => config_path('youtube.php')]);
+
+        $this->mergeConfigFrom($source, 'youtube');
     }
 
     /**
