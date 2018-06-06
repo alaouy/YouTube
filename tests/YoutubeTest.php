@@ -76,6 +76,20 @@ class YoutubeTest extends TestCase
         $this->assertObjectHasAttribute('snippet', $response[0]);
     }
 
+    public function testGetCommentThreadsByVideoId()
+    {
+        $videoId = 'rie-hPVJ7Sw';
+        $response = $this->youtube->getCommentThreads(null, null, $videoId);
+
+        $this->assertNotNull('response');
+        $this->assertEquals('youtube#commentThread', $response[0]->kind);
+        //add all these assertions here in case the api is changed,
+        //we can detect it instantly
+        $this->assertObjectHasAttribute('etag', $response[0]);
+        $this->assertObjectHasAttribute('id', $response[0]);
+        $this->assertObjectHasAttribute('snippet', $response[0]);
+    }
+
     public function testGetVideoInfo()
     {
         $vID = 'rie-hPVJ7Sw';
