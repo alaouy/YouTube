@@ -79,7 +79,7 @@ class YoutubeTest extends TestCase
     public function testGetCommentThreadsByVideoId()
     {
         $videoId = 'rie-hPVJ7Sw';
-        $response = $this->youtube->getCommentThreads(null, null, $videoId);
+        $response = $this->youtube->getCommentThreadsByVideoId($videoId);
 
         $this->assertNotNull('response');
         $this->assertEquals('youtube#commentThread', $response[0]->kind);
