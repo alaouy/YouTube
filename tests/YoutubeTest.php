@@ -7,14 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 class YoutubeTest extends TestCase
 {
-    const TEST_API_KEY = getenv("YOUTUBE_API_KEY");
-
     /** @var Youtube */
     public $youtube;
 
     public function setUp()
     {
-        $this->youtube = new Youtube(self::TEST_API_KEY);
+        $this->youtube = new Youtube(getenv("YOUTUBE_API_KEY"));
     }
 
     public function tearDown()
