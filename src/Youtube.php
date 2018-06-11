@@ -91,7 +91,8 @@ class Youtube
      * @return array
      * @throws \Exception
      */
-    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false) {
+    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false)
+    {
 
         return $this->getCommentThreads(null, null, $videoId, $maxResults, $order, $part, $pageInfo);
     }
@@ -526,7 +527,7 @@ class Youtube
                 $params = static::_parse_url_query($youtube_url);
                 return $params['v'];
             }
-        } else if (strpos($youtube_url, 'youtu.be')) {
+        } elseif (strpos($youtube_url, 'youtu.be')) {
             $path = static::_parse_url_path($youtube_url);
             $vid = substr($path, 1);
             return $vid;
@@ -553,7 +554,7 @@ class Youtube
             $segments = explode('/', $path);
             $channelId = $segments[count($segments) - 1];
             $channel = $this->getChannelById($channelId);
-        } else if (strpos($path, '/user') === 0) {
+        } elseif (strpos($path, '/user') === 0) {
             $segments = explode('/', $path);
             $username = $segments[count($segments) - 1];
             $channel = $this->getChannelByName($username);

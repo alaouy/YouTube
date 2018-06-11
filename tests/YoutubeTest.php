@@ -65,7 +65,7 @@ class YoutubeTest extends TestCase
     {
         $region = 'US';
         $part = ['snippet'];
-        $response = $this->youtube->getCategories($region,$part);
+        $response = $this->youtube->getCategories($region, $part);
 
         $this->assertNotNull('response');
         $this->assertEquals('youtube#videoCategory', $response[0]->kind);
