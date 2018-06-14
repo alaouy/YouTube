@@ -58,8 +58,6 @@ Youtube::setApiKey('KEY');
 ```php
 // use Alaouy\Youtube\Facades\Youtube;
 
-// Get comment threads by videoId
-$commentThreads = Youtube::getCommentThreadsByVideoId('zwiUB_Lh3iA');
 
 // Return an STD PHP object
 $video = Youtube::getVideoInfo('rie-hPVJ7Sw');
@@ -69,6 +67,9 @@ $videoList = Youtube::getVideoInfo(['rie-hPVJ7Sw','iKHTawgyKWQ']);
 
 // Get multiple videos related to a video
 $relatedVideos = Youtube::getRelatedVideos('iKHTawgyKWQ');
+
+// Get comment threads by videoId
+$commentThreads = Youtube::getCommentThreadsByVideoId('zwiUB_Lh3iA');
 
 // Get popular videos in a country, return an array of PHP objects
 $videoList = Youtube::getPopularVideos('us');
