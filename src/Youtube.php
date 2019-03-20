@@ -251,16 +251,17 @@ class Youtube
     }
 
     /**
-     * List videos in the channel
+     * List videos in the channel ( paginated )
      *
      * @param  string $channelId
      * @param  integer $maxResults
      * @param  string $order
      * @param  array $part
      * @param  $pageInfo
+     * @param  $pageToken
      * @return array
      */
-    public function listChannelVideos($channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'], $pageInfo = false)
+    public function listChannelVideos($channelId, $maxResults = 10, $order = null, $part = ['id', 'snippet'], $pageInfo = false, $pageToken = null)
     {
         $params = [
             'type' => 'video',
@@ -270,6 +271,10 @@ class Youtube
         ];
         if (!empty($order)) {
             $params['order'] = $order;
+        }
+        
+        if (!is_null($pageToken)) {
+            $params['pageToken'] = $pageToken;
         }
 
         return $this->searchAdvanced($params, $pageInfo);
@@ -339,6 +344,33 @@ class Youtube
         if ($optionalParams) {
             $params = array_merge($params, $optionalParams);
         }
+        $apiData = $this->api_get($API_URL, $params);
+
+        return $this->decodeSingle($apiData);
+    }
+    
+    /**
+     * @param $channelName
+     * @param bool $optionalParams
+     * @param array $part
+     * @return \StdClass
+     * @throws \Exception
+     */
+    public function getChannelByChannelName($channelName, $optionalParams = false, $part = ['id', 'snippet'])
+    {
+        $API_URL = $this->getApi('search.list');
+
+        $params = [
+            'type' => 'channel',
+            'maxResults' => '1',
+            'q' => $channelName,
+            'part' => implode(', ', $part),
+        ];
+
+        if ($optionalParams) {
+            $params = array_merge($params, $optionalParams);
+        }
+
         $apiData = $this->api_get($API_URL, $params);
 
         return $this->decodeSingle($apiData);
