@@ -86,10 +86,17 @@ $videoList = Youtube::searchChannelVideos('keyword', 'UCk1SpWNzOs4MYmr0uICEntg',
 // List videos in a given channel, return an array of PHP objects
 $videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
 
+// List videos Paginated in a given channel, return an array of PHP objects
+$videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40, null, ['id','snippet'], false, 'CDIQAA');
+
 $results = Youtube::searchAdvanced([ /* params */ ]);
 
-// Get channel data by channel name, return an STD PHP object
+// Get channel data by username, return an STD PHP object
 $channel = Youtube::getChannelByName('xdadevelopers');
+
+// Get channel data by channel name, return an STD PHP object
+$channel = Youtube::getChannelByChannelName('Talks at Google');
+
 
 // Get channel data by channel ID, return an STD PHP object
 $channel = Youtube::getChannelById('UCk1SpWNzOs4MYmr0uICEntg');
