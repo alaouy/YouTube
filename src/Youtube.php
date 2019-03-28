@@ -83,27 +83,28 @@ class Youtube
     }
 
     /**
-     * @param string $videoId       Instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
-     * @param integer $maxResults   Specifies the maximum number of items that should be returned in the result set. Acceptable values are 1 to 100, inclusive. The default value is 20.
-     * @param string $order         Specifies the order in which the API response should list comment threads. Valid values are: time, relevance.
-     * @param array $part           Specifies a list of one or more commentThread resource properties that the API response will include.
-     * @param bool $pageInfo        Add page info to returned array.
+     * @param string $videoId Instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
+     * @param integer $maxResults Specifies the maximum number of items that should be returned in the result set. Acceptable values are 1 to 100, inclusive. The default value is 20.
+     * @param string $order Specifies the order in which the API response should list comment threads. Valid values are: time, relevance.
+     * @param array $part Specifies a list of one or more commentThread resource properties that the API response will include.
+     * @param bool $pageInfo Add page info to returned array.
      * @return array
      * @throws \Exception
      */
-    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false) {
+    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false)
+    {
 
         return $this->getCommentThreads(null, null, $videoId, $maxResults, $order, $part, $pageInfo);
     }
 
     /**
-     * @param string $channelId     Instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
-     * @param string $id            Specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.
-     * @param string $videoId       Instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
-     * @param integer $maxResults   Specifies the maximum number of items that should be returned in the result set. Acceptable values are 1 to 100, inclusive. The default value is 20.
-     * @param string $order         Specifies the order in which the API response should list comment threads. Valid values are: time, relevance.
-     * @param array $part           Specifies a list of one or more commentThread resource properties that the API response will include.
-     * @param bool $pageInfo        Add page info to returned array.
+     * @param string $channelId Instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
+     * @param string $id Specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.
+     * @param string $videoId Instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
+     * @param integer $maxResults Specifies the maximum number of items that should be returned in the result set. Acceptable values are 1 to 100, inclusive. The default value is 20.
+     * @param string $order Specifies the order in which the API response should list comment threads. Valid values are: time, relevance.
+     * @param array $part Specifies a list of one or more commentThread resource properties that the API response will include.
+     * @param bool $pageInfo Add page info to returned array.
      * @return array
      * @throws \Exception
      */
@@ -392,7 +393,7 @@ class Youtube
         $apiData = $this->api_get($API_URL, $params);
 
         $result = ['results' => $this->decodeList($apiData)];
-        $result['info']['totalResults'] =  (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
+        $result['info']['totalResults'] = (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
         $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
         $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
@@ -409,7 +410,7 @@ class Youtube
     {
         $API_URL = $this->getApi('playlists.list');
         $params = [
-            'id' => is_array($id)? implode(',', $id) : $id,
+            'id' => is_array($id) ? implode(',', $id) : $id,
             'part' => implode(', ', $part),
         ];
         $apiData = $this->api_get($API_URL, $params);
@@ -443,7 +444,7 @@ class Youtube
 
         $apiData = $this->api_get($API_URL, $params);
         $result = ['results' => $this->decodeList($apiData)];
-        $result['info']['totalResults'] =  (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
+        $result['info']['totalResults'] = (isset($this->page_info['totalResults']) ? $this->page_info['totalResults'] : 0);
         $result['info']['nextPageToken'] = (isset($this->page_info['nextPageToken']) ? $this->page_info['nextPageToken'] : false);
         $result['info']['prevPageToken'] = (isset($this->page_info['prevPageToken']) ? $this->page_info['prevPageToken'] : false);
 
@@ -691,6 +692,9 @@ class Youtube
 
         //boilerplates for CURL
         $tuCurl = curl_init();
+
+        curl_setopt($tuCurl, CURLOPT_HEADER, array('Referer' => $_SERVER['HTTP_HOST']));
+
         curl_setopt($tuCurl, CURLOPT_URL, $url . (strpos($url, '?') === false ? '?' : '') . http_build_query($params));
         if (strpos($url, 'https') === false) {
             curl_setopt($tuCurl, CURLOPT_PORT, 80);
