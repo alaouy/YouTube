@@ -1,12 +1,12 @@
 {
-  "name": "alaouy/youtube",
+  "name": "kield-01/youtube",
   "description": "Laravel PHP Facade/Wrapper for the Youtube Data API v3",
   "keywords": ["youtube", "api", "video", "laravel", "alaouy"],
   "license": "MIT",
   "authors": [
     {
-      "name": "Mustapha Alaouy",
-      "email": "alaouym@gmail.com"
+      "name": "Roman Kozin",
+      "email": "romanko95.rk@gmail.com"
     }
   ],
   "require": {
