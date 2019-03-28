@@ -24,17 +24,17 @@ composer require alaouy/youtube
 
 In `/config/app.php` add YoutubeServiceProvider:
 ```
-Alaouy\Youtube\YoutubeServiceProvider::class,
+KielD01\Youtube\YoutubeServiceProvider::class,
 ```
 
 Do not forget to add also Youtube facade there:
 ```
-'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
+'Youtube' => KielD01\Youtube\Facades\Youtube::class,
 ```
 
 Publish config settings:
 ```
-$ php artisan vendor:publish --provider="Alaouy\Youtube\YoutubeServiceProvider"
+$ php artisan vendor:publish --provider="KielD01\Youtube\YoutubeServiceProvider"
 ```
 
 Set your Youtube API key in the file:
@@ -56,7 +56,7 @@ Youtube::setApiKey('KEY');
 ## Usage
 
 ```php
-// use Alaouy\Youtube\Facades\Youtube;
+// use KielD01\Youtube\Facades\Youtube;
 
 
 // Return an STD PHP object
