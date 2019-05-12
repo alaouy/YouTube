@@ -1,7 +1,7 @@
 Youtube
 =========
 
-![Travis Youtube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master)
+![Travis Youtube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/alaouym)
 
 Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 
@@ -202,6 +202,9 @@ Please read the ["Reference" section](https://developers.google.com/youtube/v3/d
 - [Youtube Data API v3 Doc](https://developers.google.com/youtube/v3/)
 - [Obtain API key from Google API Console](https://console.developers.google.com)
 
+## Donation
+If you find this project to be of use to you please consider buying me a cup of tea :)
 
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/alaouym)
 ## Credits
 Built on code from Madcoda's [php-youtube-api](https://github.com/madcoda/php-youtube-api).
