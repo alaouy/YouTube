@@ -450,6 +450,26 @@ class Youtube
         return $result;
     }
 
+   
+    /**
+     * @param $PlaylistId
+     */
+    public function getAllPlaylistItemsByPlaylistId($playlistId)
+    {
+        return $this->ListVideoByPlaylist($playlistId, null);
+    }
+     
+        private function ListVideoByPlaylist($playlistId, $nextPageToken = null)
+    {
+        $playlistItems = $this->getPlaylistItemsByPlaylistId($playlistId, $nextPageToken);
+        if ($playlistItems['info']['nextPageToken'] != false) {
+            $nextPageToken = $playlistItems['info']['nextPageToken'];
+        } else {
+            return $playlistItems['results'];
+        }
+        return array_merge($playlistItems['results'], $this->getVideoByPlaylist($playlistId, $nextPageToken));
+    }
+    
     /**
      * @param $channelId
      * @param array $part
