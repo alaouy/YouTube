@@ -324,21 +324,21 @@ class Youtube
 
     /**
      * @param $username
-     * @param $optionalParams
+     * @param array $optionalParams
      * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
-    public function getChannelByName($username, $optionalParams = false, $part = ['id', 'snippet', 'contentDetails', 'statistics', 'invideoPromotion'])
+    public function getChannelByName($username, $optionalParams = [], $part = ['id', 'snippet', 'contentDetails', 'statistics', 'invideoPromotion'])
     {
         $API_URL = $this->getApi('channels.list');
         $params = [
             'forUsername' => $username,
             'part' => implode(', ', $part),
         ];
-        if ($optionalParams) {
-            $params = array_merge($params, $optionalParams);
-        }
+        
+        $params = array_merge($params, $optionalParams);
+        
         $apiData = $this->api_get($API_URL, $params);
 
         return $this->decodeSingle($apiData);
@@ -346,21 +346,21 @@ class Youtube
 
     /**
      * @param $id
-     * @param $optionalParams
+     * @param array $optionalParams
      * @param array $part
      * @return \StdClass
      * @throws \Exception
      */
-    public function getChannelById($id, $optionalParams = false, $part = ['id', 'snippet', 'contentDetails', 'statistics', 'invideoPromotion'])
+    public function getChannelById($id, $optionalParams = [], $part = ['id', 'snippet', 'contentDetails', 'statistics', 'invideoPromotion'])
     {
         $API_URL = $this->getApi('channels.list');
         $params = [
             'id' => is_array($id) ? implode(',', $id) : $id,
             'part' => implode(', ', $part),
         ];
-        if ($optionalParams) {
-            $params = array_merge($params, $optionalParams);
-        }
+        
+        $params = array_merge($params, $optionalParams);
+        
         $apiData = $this->api_get($API_URL, $params);
 
         if (is_array($id)) {
@@ -384,10 +384,8 @@ class Youtube
             'channelId' => $channelId,
             'part' => implode(', ', $part)
         ];
-
-        if ($optionalParams) {
-            $params = array_merge($params, $optionalParams);
-        }
+        
+        $params = array_merge($params, $optionalParams);        
 
         $apiData = $this->api_get($API_URL, $params);
 
