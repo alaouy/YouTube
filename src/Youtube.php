@@ -690,7 +690,9 @@ class Youtube
         //boilerplates for CURL
         $tuCurl = curl_init();
         
-        curl_setopt($tuCurl, CURLOPT_HEADER, array('Referer' => $_SERVER['HTTP_HOST']));
+        if (isset($_SERVER['HTTP_HOST'])) {
+            curl_setopt($tuCurl, CURLOPT_HEADER, array('Referer' => $_SERVER['HTTP_HOST']));
+        }
         
         curl_setopt($tuCurl, CURLOPT_URL, $url . (strpos($url, '?') === false ? '?' : '') . http_build_query($params));
         if (strpos($url, 'https') === false) {
