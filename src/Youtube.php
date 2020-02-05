@@ -30,19 +30,25 @@ class Youtube
     public $page_info = [];
 
     /**
+     * @var array
+     */
+    protected $config = [];
+
+    /**
      * Constructor
      * $youtube = new Youtube(['key' => 'KEY HERE'])
      *
      * @param string $key
      * @throws \Exception
      */
-    public function __construct($key)
+    public function __construct($key, $config = [])
     {
         if (is_string($key) && !empty($key)) {
             $this->youtube_key = $key;
         } else {
             throw new \Exception('Google API key is Required, please visit https://console.developers.google.com/');
         }
+        $this->config['use-http-host'] = isset($config['use-http-host']) ? $config['use-http-host'] : false;
     }
 
     /**
@@ -690,7 +696,7 @@ class Youtube
         //boilerplates for CURL
         $tuCurl = curl_init();
         
-        if (isset($_SERVER['HTTP_HOST'])) {
+        if (isset($_SERVER['HTTP_HOST']) && $this->config['use-http-host']) {
             curl_setopt($tuCurl, CURLOPT_HEADER, array('Referer' => $_SERVER['HTTP_HOST']));
         }
         
