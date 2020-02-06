@@ -52,6 +52,17 @@ class Youtube
     }
 
     /**
+     * @param $setting
+     * @return Youtube
+     */
+    public function useHttpHost($setting)
+    {
+        $this->config['use-http-host'] = !!$setting;
+
+        return $this;
+    }
+
+    /**
      * @param $key
      * @return Youtube
      */

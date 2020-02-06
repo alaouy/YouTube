@@ -179,6 +179,22 @@ print_r($search['results']);
 
 The pagination above is quite basic. Depending on what you are trying to achieve you may want to create a recursive function that traverses the results.
 
+## Manual Class Instantiation
+
+```php
+// Directly call the YouTube constructor
+$youtube = new Youtube(config('YOUTUBE_API_KEY'));
+
+// By default, if the $_SERVER['HTTP_HOST'] header is set,
+// it will be used as the `Referer` header. To override
+// this setting, set 'use-http-host' to false during
+// object construction:
+$youtube = new Youtube(config('YOUTUBE_API_KEY'), ['use-http-host' => false]);
+
+// This setting can also be set after the object was created
+$youtube->useHttpHost(false);
+```
+
 ## Run Unit Test
 If you have PHPUnit installed in your environment, run:
 
