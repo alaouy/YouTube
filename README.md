@@ -65,6 +65,9 @@ $video = Youtube::getVideoInfo('rie-hPVJ7Sw');
 // Get multiple videos info from an array
 $videoList = Youtube::getVideoInfo(['rie-hPVJ7Sw','iKHTawgyKWQ']);
 
+// Get localized video info
+$video = Youtube::getLocalizedVideoInfo('vjF9GgrY9c0', 'pl');
+
 // Get multiple videos related to a video
 $relatedVideos = Youtube::getRelatedVideos('iKHTawgyKWQ');
 

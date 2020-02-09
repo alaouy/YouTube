@@ -172,6 +172,36 @@ class Youtube
 
         return $this->decodeSingle($apiData);
     }
+    
+    /**
+     * Gets localized video info by language (f.ex. de) by adding this parameter after video id
+     * Youtube::getLocalizedVideoInfo($video->url, 'de')
+     *
+     * @param $vId
+     * @param $language
+     * @param array $part
+     * @return \StdClass
+     * @throws \Exception
+     */
+
+    public function getLocalizedVideoInfo($vId, $language, $part = ['id', 'snippet', 'contentDetails', 'player', 'statistics', 'status']) {
+
+        $API_URL = $this->getApi('videos.list');
+        $params = [
+            'id'    => is_array($vId) ? implode(',', $vId) : $vId,
+            'key' => $this->youtube_key,
+            'hl'    =>  $language,
+            'part' => implode(', ', $part),
+        ];
+
+        $apiData = $this->api_get($API_URL, $params);
+
+        if (is_array($vId)) {
+            return $this->decodeMultiple($apiData);
+        }
+
+        return $this->decodeSingle($apiData);
+    }
 
     /**
      * Gets popular videos for a specific region (ISO 3166-1 alpha-2)
