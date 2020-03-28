@@ -560,7 +560,7 @@ class Youtube
      * @throws \Exception
      * @return string Video Id
      */
-    public static function parseVIdFromURL($youtube_url)
+    public static function parseVidFromURL($youtube_url)
     {
         if (strpos($youtube_url, 'youtube.com')) {
             if (strpos($youtube_url, 'embed')) {
