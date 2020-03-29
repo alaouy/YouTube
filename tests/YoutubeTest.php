@@ -278,19 +278,19 @@ class YoutubeTest extends TestCase
 
     public function testParseVIdFromURLFull()
     {
-        $vId = $this->youtube->parseVIdFromURL('http://www.youtube.com/watch?v=1FJHYqE0RDg');
+        $vId = $this->youtube->parseVidFromURL('http://www.youtube.com/watch?v=1FJHYqE0RDg');
         $this->assertEquals('1FJHYqE0RDg', $vId);
     }
 
     public function testParseVIdFromURLShort()
     {
-        $vId = $this->youtube->parseVIdFromURL('http://youtu.be/1FJHYqE0RDg');
+        $vId = $this->youtube->parseVidFromURL('http://youtu.be/1FJHYqE0RDg');
         $this->assertEquals('1FJHYqE0RDg', $vId);
     }
 
     public function testParseVIdFromEmbedURL()
     {
-        $vId = $this->youtube->parseVIdFromURL('http://youtube.com/embed/1FJHYqE0RDg');
+        $vId = $this->youtube->parseVidFromURL('http://youtube.com/embed/1FJHYqE0RDg');
         $this->assertEquals('1FJHYqE0RDg', $vId);
     }
 
@@ -300,7 +300,7 @@ class YoutubeTest extends TestCase
      */
     public function testParseVIdFromURLException($url)
     {
-        $vId = $this->youtube->parseVIdFromURL($url);
+        $vId = $this->youtube->parseVidFromURL($url);
     }
 
     /**
@@ -308,7 +308,7 @@ class YoutubeTest extends TestCase
      */
     public function testParseVIdException()
     {
-        $vId = $this->youtube->parseVIdFromURL('http://www.facebook.com');
+        $vId = $this->youtube->parseVidFromURL('http://www.facebook.com');
     }
 
     public function testGetActivitiesByChannelId()
