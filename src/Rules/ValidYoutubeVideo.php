@@ -33,7 +33,6 @@ class ValidYoutubeVideo implements Rule
             return false;
         }
 
-      
         return $video != false;
     }
 
