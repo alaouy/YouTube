@@ -28,7 +28,7 @@ class ValidYoutubeVideo implements Rule
     {
         try {
             $videoId = Youtube::parseVidFromURL($value);
-            $video = Youtube::getVideoInfo($videoId)['id'];
+            $video = Youtube::getVideoInfo($videoId, ['id']);
         } catch (\Exception $exception) {
             return false;
         }
