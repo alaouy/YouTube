@@ -117,6 +117,20 @@ $videoId = Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk
 // result: moSFlvxnbgk
 ```
 
+## Validation Rules
+
+```php
+// use Alaouy\Youtube\Rules\ValidYoutubeVideo;
+
+
+// Validate a YouTube Video URL
+[
+    'youtube_video_url' => ['bail', 'required', new ValidYoutubeVideo]
+];
+```
+
+You can use the bail rule in conjunction with this in order to prevent unnecessary queries.  
+
 ## Basic Search Pagination
 
 ```php
