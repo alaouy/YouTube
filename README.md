@@ -228,7 +228,7 @@ $ ./vendor/bin/phpunit
 
 ## Format of returned data
 The returned JSON is decoded as PHP objects (not Array).
-Please read the ["Reference" section](https://developers.google.com/youtube/v3/docs/) of the Official API doc.
+Please read the ["Reference" section](https://developers.google.com/youtube/v3/docs/) of the Official API doc for better understanding.
 
 
 ## Youtube Data API v3
