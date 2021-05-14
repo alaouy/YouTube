@@ -43,6 +43,6 @@ class ValidYoutubeVideo implements Rule
      */
     public function message()
     {
-        return 'The supplied URL does not look like a Youtube URL.';
+        return __('The supplied URL does not look like a Youtube URL.');
     }
 }
