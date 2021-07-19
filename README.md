@@ -22,12 +22,12 @@ composer require alaouy/youtube
 
 ## Configuration
 
-In `/config/app.php` add YoutubeServiceProvider:
+In `/config/app.php` add YoutubeServiceProvider (Laravel < 5.5):
 ```
 Alaouy\Youtube\YoutubeServiceProvider::class,
 ```
 
-Do not forget to add also Youtube facade there:
+Do not forget to add also Youtube facade there (Laravel < 5.5):
 ```
 'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
 ```
