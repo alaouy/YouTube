@@ -1,9 +1,9 @@
-Youtube
+YouTube
 =========
 
-![Travis Youtube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/alaouym)
+![Travis YouTube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/alaouym)
 
-Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
+Laravel PHP Facade/Wrapper for the YouTube Data API v3 ( Non-OAuth )
 
 ## Requirements
 
@@ -11,7 +11,7 @@ Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 - Laravel 5.1 or higher
 - API key from [Google Console](https://console.developers.google.com)
 
-Looking for Youtube Package for either of these: PHP 5, Laravel 5.0, Laravel 4? Visit the [`php5-branch`](https://github.com/alaouy/Youtube/tree/php5)
+Looking for YouTube Package for either of these: PHP 5, Laravel 5.0, Laravel 4? Visit the [`php5-branch`](https://github.com/alaouy/Youtube/tree/php5)
 
 ## Installation
 
@@ -27,7 +27,7 @@ In `/config/app.php` add YoutubeServiceProvider (Laravel < 5.5):
 Alaouy\Youtube\YoutubeServiceProvider::class,
 ```
 
-Do not forget to add also Youtube facade there (Laravel < 5.5):
+Do not forget to add also YouTube facade there (Laravel < 5.5):
 ```
 'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
 ```
@@ -37,7 +37,7 @@ Publish config settings:
 $ php artisan vendor:publish --provider="Alaouy\Youtube\YoutubeServiceProvider"
 ```
 
-Set your Youtube API key in the file:
+Set your YouTube API key in the file:
 
 ```
 /config/youtube.php
@@ -231,8 +231,8 @@ The returned JSON is decoded as PHP objects (not Array).
 Please read the ["Reference" section](https://developers.google.com/youtube/v3/docs/) of the Official API doc.
 
 
-## Youtube Data API v3
-- [Youtube Data API v3 Doc](https://developers.google.com/youtube/v3/)
+## YouTube Data API v3
+- [YouTube Data API v3 Doc](https://developers.google.com/youtube/v3/)
 - [Obtain API key from Google API Console](https://console.developers.google.com)
 
 ## Donation
