@@ -10,7 +10,7 @@ class YoutubeTest extends TestCase
     /** @var Youtube */
     public $youtube;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->youtube = new Youtube(getenv("YOUTUBE_API_KEY"));
     }
