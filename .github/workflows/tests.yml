@@ -37,7 +37,7 @@ jobs:
     - name: Test on PHP 7.0
       uses: php-actions/phpunit@v3
       with:
-        configuration: ./phpunit.xml
+        # configuration: ./phpunit.xml
         php_version: "7.0"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
