@@ -15,7 +15,7 @@ class YoutubeTest extends TestCase
         $this->youtube = new Youtube(getenv("YOUTUBE_API_KEY"));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->youtube = null;
     }
