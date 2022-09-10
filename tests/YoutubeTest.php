@@ -35,11 +35,10 @@ class YoutubeTest extends TestCase
         $this->youtube = new Youtube(array());
     }
 
-    /**
-     * @expectedException \Exception
-     */
+
     public function testConstructorFail2()
     {
+        $this->expectException(\Exception::class);
         $this->youtube = new Youtube('');
     }
 
@@ -50,13 +49,14 @@ class YoutubeTest extends TestCase
         $this->assertEquals($this->youtube->getApiKey(), 'new_api_key');
     }
 
-    /**
-     * @expectedException \Exception
-     */
+
     public function testInvalidApiKey()
     {
         $this->youtube = new Youtube(array('key' => 'nonsense'));
         $vID = 'rie-hPVJ7Sw';
+
+        $this->expectException(\Exception::class);
+        
         $this->youtube->getVideoInfo($vID);
     }
 
@@ -295,18 +295,16 @@ class YoutubeTest extends TestCase
 
     /**
      * @dataProvider urlProvider
-     * @expectedException \Exception
      */
     public function testParseVIdFromURLException($url)
     {
+        $this->expectException(\Exception::class);
         $vId = $this->youtube->parseVidFromURL($url);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testParseVIdException()
     {
+        $this->expectException(\Exception::class);
         $vId = $this->youtube->parseVidFromURL('http://www.facebook.com');
     }
 
@@ -319,14 +317,13 @@ class YoutubeTest extends TestCase
         $this->assertEquals('Google', $response[0]->snippet->channelTitle);
     }
 
-    /**
-     *
-     *
-     * @expectedException  \InvalidArgumentException
-     */
+
     public function testGetActivitiesByChannelIdException()
     {
         $channelId = '';
+        
+        $this->expectException(\InvalidArgumentException::class);
+        
         $response = $this->youtube->getActivitiesByChannelId($channelId);
     }
 
@@ -350,11 +347,14 @@ class YoutubeTest extends TestCase
 
     /**
      * Test skipped for now, since the API returns Error 500
-     * @expectedException \Exception
+     *
      */
     public function testNotFoundAPICall2()
     {
         $channelId = 'non_exist_channelid';
+        
+        $this->expectException(\Exception::class);
+        
         $response = $this->youtube->getPlaylistsByChannelId($channelId);
         $this->assertEquals($response->getStatusCode(), 404);
     }
