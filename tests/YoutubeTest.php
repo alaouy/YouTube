@@ -28,11 +28,10 @@ class YoutubeTest extends TestCase
         ];
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testConstructorFail()
     {
+        $this->expectException(Exception::class);
+
         $this->youtube = new Youtube(array());
     }
 
