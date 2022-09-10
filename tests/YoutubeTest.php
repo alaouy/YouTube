@@ -52,11 +52,10 @@ class YoutubeTest extends TestCase
 
     public function testInvalidApiKey()
     {
-        $this->youtube = new Youtube(array('key' => 'nonsense'));
-        $vID = 'rie-hPVJ7Sw';
-
         $this->expectException(\Exception::class);
-        
+
+        $this->youtube = new Youtube(array('key' => 'nonsense'));
+        $vID = 'rie-hPVJ7Sw';        
         $this->youtube->getVideoInfo($vID);
     }
 
