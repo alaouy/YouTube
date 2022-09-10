@@ -1,7 +1,7 @@
 Youtube
 =========
 
-![Travis Youtube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/alaouym)
+[![Youtube Tests](https://github.com/alaouy/Youtube/actions/workflows/tests.yml/badge.svg)](https://github.com/alaouy/Youtube/actions/workflows/tests.yml) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/alaouym)
 
 Laravel PHP Facade/Wrapper for the Youtube Data API v3 ( Non-OAuth )
 
