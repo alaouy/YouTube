@@ -33,9 +33,15 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
+    
+    - name: Test on PHP 7.0
+      uses: php-actions/phpunit@v3
+      with:
+        configuration: ./phpunit.xml
+        php_version: "7.0"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
-    - name: Run test suite
-      run: ./vendor/bin/phpunit
+#    - name: Run test suite
+#      run: ./vendor/bin/phpunit
