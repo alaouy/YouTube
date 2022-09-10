@@ -30,7 +30,7 @@ class YoutubeTest extends TestCase
 
     public function testConstructorFail()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $this->youtube = new Youtube(array());
     }
