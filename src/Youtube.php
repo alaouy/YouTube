@@ -641,12 +641,15 @@ class Youtube
 
             throw new \Exception($msg);
         } else {
-            $itemsArray = $resObj->items;
-            if (!is_array($itemsArray) || count($itemsArray) == 0) {
-                return false;
-            } else {
-                return $itemsArray[0];
+            if(isset($resObj->items)){
+                $itemsArray = $resObj->items;
+                if (!is_array($itemsArray) || count($itemsArray) == 0) {
+                    return false;
+                } else {
+                    return $itemsArray[0];
+                }
             }
+           return false;
         }
     }
 
