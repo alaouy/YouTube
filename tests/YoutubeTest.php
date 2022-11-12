@@ -334,7 +334,6 @@ class YoutubeTest extends TestCase
 		    'https://www.youtube.com/adsme' => 'UCIahc4m5fwKiHY-wiwaJI5w',
 		    'https://www.youtube.com/accounted' => 'UCYJLdSmyKoXCbnd-pklMn5Q',
 		    'https://www.youtube.com/c/Ecolinguist' => 'UChqLwfp3eAkAwX9DGnqr_CA',
-		    'https://www.youtube.com/d' => 'UCEFnMfrd1F3HZFPrzelfNFw',
 		    'https://www.youtube.com/feed/library' => false,
 		    'https://www.youtube.com/feedme' => 'UCVWLOM5QBtzP2hD-h232XwA',
 		    'https://www.youtube.com/gaming' => false,
