@@ -328,10 +328,38 @@ class YoutubeTest extends TestCase
 
     public function testGetChannelFromURL()
     {
-        $channel = $this->youtube->getChannelFromURL('http://www.youtube.com/user/Google');
+	    $urls = [
+		    'https://www.youtube.com/account_notifications' => false,
+		    'https://www.youtube.com/ads/' => false,
+		    'https://www.youtube.com/adsme' => 'UCIahc4m5fwKiHY-wiwaJI5w',
+		    'https://www.youtube.com/accounted' => 'UCYJLdSmyKoXCbnd-pklMn5Q',
+		    'https://www.youtube.com/c/Ecolinguist' => 'UChqLwfp3eAkAwX9DGnqr_CA',
+		    'https://www.youtube.com/d' => 'UCEFnMfrd1F3HZFPrzelfNFw',
+		    'https://www.youtube.com/feed/library' => false,
+		    'https://www.youtube.com/feedme' => 'UCVWLOM5QBtzP2hD-h232XwA',
+		    'https://www.youtube.com/gaming' => false,
+		    'https://www.youtube.com/howyoutubeworks' => false,
+		    'https://www.youtube.com/howyoutubeworks/product-features/search/' => false,
+		    'https://www.youtube.com/shorts/lXSwVeKW1QE' => false,
+		    'https://www.youtube.com/t' => 'UCOOud2eytL5RAMK0c7XaIFA',
+		    'https://www.youtube.com/results' => false,
+		    'https://www.youtube.com/results?search_query=laravel' => false,
+		    'https://www.youtube.com/t/terms' => false,
+		    'https://www.youtube.com/upload' => false,
+		    'https://www.youtube.com/uploadme' => 'UC024O6VmSecm2A6s_GZ8woQ',
+		    'https://www.youtube.com/user/Google' => 'UCK8sQmJBp8GCxrOtXWBpyEA',
+		    'https://www.youtube.com/yt' => false,
+		    'https://www.youtube.com/yt/about/policies/' => false,
+	    ];
 
-        $this->assertEquals('UCK8sQmJBp8GCxrOtXWBpyEA', $channel->id);
-        $this->assertEquals('Google', $channel->snippet->title);
+	    foreach ($urls as $url => $result) {
+		    try {
+			    $channel = $this->youtube->getChannelFromURL($url);
+			    $this->assertEquals($channel->id, $result);
+		    } catch (\Exception $e) {
+			    $this->assertEquals(false, $result);
+		    }
+	    }
     }
 
     /**
