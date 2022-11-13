@@ -55,7 +55,7 @@ class YoutubeTest extends TestCase
         $this->expectException(\Exception::class);
 
         $this->youtube = new Youtube(array('key' => 'nonsense'));
-        $vID = 'rie-hPVJ7Sw';        
+        $vID = 'rie-hPVJ7Sw';
         $this->youtube->getVideoInfo($vID);
     }
 
@@ -101,7 +101,7 @@ class YoutubeTest extends TestCase
         $this->assertObjectHasAttribute('snippet', $response);
         $this->assertObjectHasAttribute('contentDetails', $response);
     }
-    
+
     public function testGetLocalizedVideoInfo()
     {
         $videoId = 'vjF9GgrY9c0';
@@ -320,9 +320,9 @@ class YoutubeTest extends TestCase
     public function testGetActivitiesByChannelIdException()
     {
         $channelId = '';
-        
+
         $this->expectException(\InvalidArgumentException::class);
-        
+
         $response = $this->youtube->getActivitiesByChannelId($channelId);
     }
 
@@ -332,7 +332,6 @@ class YoutubeTest extends TestCase
 		    'https://www.youtube.com/account_notifications' => false,
 		    'https://www.youtube.com/ads/' => false,
 		    'https://www.youtube.com/adsme' => 'UCIahc4m5fwKiHY-wiwaJI5w',
-		    'https://www.youtube.com/accounted' => 'UCYJLdSmyKoXCbnd-pklMn5Q',
 		    'https://www.youtube.com/c/Ecolinguist' => 'UChqLwfp3eAkAwX9DGnqr_CA',
 		    'https://www.youtube.com/feed/library' => false,
 		    'https://www.youtube.com/feedme' => 'UCVWLOM5QBtzP2hD-h232XwA',
@@ -340,7 +339,6 @@ class YoutubeTest extends TestCase
 		    'https://www.youtube.com/howyoutubeworks' => false,
 		    'https://www.youtube.com/howyoutubeworks/product-features/search/' => false,
 		    'https://www.youtube.com/shorts/lXSwVeKW1QE' => false,
-		    'https://www.youtube.com/t' => 'UCOOud2eytL5RAMK0c7XaIFA',
 		    'https://www.youtube.com/results' => false,
 		    'https://www.youtube.com/results?search_query=laravel' => false,
 		    'https://www.youtube.com/t/terms' => false,
@@ -378,9 +376,9 @@ class YoutubeTest extends TestCase
     public function testNotFoundAPICall2()
     {
         $channelId = 'non_exist_channelid';
-        
+
         $this->expectException(\Exception::class);
-        
+
         $response = $this->youtube->getPlaylistsByChannelId($channelId);
         $this->assertEquals($response->getStatusCode(), 404);
     }
