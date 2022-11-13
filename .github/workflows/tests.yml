@@ -21,7 +21,7 @@ jobs:
 
     env:
       YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
-      
+
     name: Testing on PHP ${{ matrix.php-versions }}
     steps:
     - uses: actions/checkout@v3
