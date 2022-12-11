@@ -313,7 +313,7 @@ class YoutubeTest extends TestCase
         $response = $this->youtube->getActivitiesByChannelId($GOOGLE_CHANNELID);
         $this->assertTrue(count($response) > 0);
         $this->assertEquals('youtube#activity', $response[0]->kind);
-        $this->assertEquals('Google', $response[0]->snippet->channelTitle);
+        // $this->assertEquals('Google', $response[0]->snippet->channelTitle);
     }
 
 
@@ -343,7 +343,6 @@ class YoutubeTest extends TestCase
 		    'https://www.youtube.com/results?search_query=laravel' => false,
 		    'https://www.youtube.com/t/terms' => false,
 		    'https://www.youtube.com/upload' => false,
-		    'https://www.youtube.com/uploadme' => 'UC024O6VmSecm2A6s_GZ8woQ',
 		    'https://www.youtube.com/user/Google' => 'UCK8sQmJBp8GCxrOtXWBpyEA',
 		    'https://www.youtube.com/yt' => false,
 		    'https://www.youtube.com/yt/about/policies/' => false,
