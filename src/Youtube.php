@@ -767,13 +767,16 @@ class Youtube
             throw new \Exception($msg);
         } else {
             $this->page_info = [
-                'resultsPerPage' => $resObj->pageInfo->resultsPerPage,
-                'totalResults' => $resObj->pageInfo->totalResults,
                 'kind' => $resObj->kind,
                 'etag' => $resObj->etag,
                 'prevPageToken' => null,
                 'nextPageToken' => null,
             ];
+
+            if (isset($resObj->pageInfo)) {
+                $this->page_info['resultsPerPage'] = $resObj->pageInfo->resultsPerPage;
+                $this->page_info['totalResults'] = $resObj->pageInfo->totalResults;
+            }
 
             if (isset($resObj->prevPageToken)) {
                 $this->page_info['prevPageToken'] = $resObj->prevPageToken;
