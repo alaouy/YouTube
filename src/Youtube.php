@@ -153,7 +153,7 @@ class Youtube
      * @return array
      * @throws \Exception
      */
-    public function getCommentThreads($channelId = null, $id = null, $videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false, $pageToken)
+    public function getCommentThreads($channelId = null, $id = null, $videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false, $pageToken = null)
     {
         $API_URL = $this->getApi('commentThreads.list');
 
