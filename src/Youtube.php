@@ -136,7 +136,7 @@ class Youtube
      * @return array
      * @throws \Exception
      */
-    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false), $pageToken = null {
+    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false, $pageToken = null) {
 
         return $this->getCommentThreads(null, null, $videoId, $maxResults, $order, $part, $pageInfo, $pageToken);
     }
