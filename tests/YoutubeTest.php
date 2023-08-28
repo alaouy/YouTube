@@ -193,7 +193,7 @@ class YoutubeTest extends TestCase
     public function testGetRelatedVideos()
     {
         $limit = rand(3, 10);
-        $vID = 'rie-hPVJ7Sw';
+        $vID = 'dQw4w9WgXcQ';
         $response = $this->youtube->getRelatedVideos($vID, $limit);
 
         $this->assertEquals($limit, count($response));
