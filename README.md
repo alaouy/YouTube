@@ -68,9 +68,6 @@ $videoList = Youtube::getVideoInfo(['rie-hPVJ7Sw','iKHTawgyKWQ']);
 // Get localized video info
 $video = Youtube::getLocalizedVideoInfo('vjF9GgrY9c0', 'pl');
 
-// Get multiple videos related to a video
-$relatedVideos = Youtube::getRelatedVideos('iKHTawgyKWQ');
-
 // Get comment threads by videoId
 $commentThreads = Youtube::getCommentThreadsByVideoId('zwiUB_Lh3iA');
 
@@ -129,7 +126,7 @@ $videoId = Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk
 ];
 ```
 
-You can use the bail rule in conjunction with this in order to prevent unnecessary queries.  
+You can use the bail rule in conjunction with this in order to prevent unnecessary queries.
 
 ## Basic Search Pagination
 

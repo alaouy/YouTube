@@ -190,21 +190,6 @@ class YoutubeTest extends TestCase
         //TODO
     }
 
-    public function testGetRelatedVideos()
-    {
-        $limit = rand(3, 10);
-        $vID = 'dQw4w9WgXcQ';
-        $response = $this->youtube->getRelatedVideos($vID, $limit);
-
-        $this->assertEquals($limit, count($response));
-        $this->assertNotNull('response');
-        $this->assertEquals('youtube#searchResult', $response[0]->kind);
-        $this->assertEquals('youtube#video', $response[0]->id->kind);
-        //add all these assertions here in case the api is changed,
-        //we can detect it instantly
-        $this->assertObjectHasAttribute('snippet', $response[0]);
-    }
-
     public function testGetChannelByName()
     {
         $response = $this->youtube->getChannelByName('Google');

@@ -580,30 +580,6 @@ class Youtube
     }
 
     /**
-     * @param  string $videoId
-     * @param  integer $maxResults
-     * @param  array $part
-     * @return array
-     * @throws \Exception
-     */
-    public function getRelatedVideos($videoId, $maxResults = 5, $part = ['id', 'snippet'])
-    {
-        if (empty($videoId)) {
-            throw new \InvalidArgumentException('A video id must be supplied');
-        }
-        $API_URL = $this->getApi('search.list');
-        $params = [
-            'type' => 'video',
-            'relatedToVideoId' => $videoId,
-            'part' => implode(',', $part),
-            'maxResults' => $maxResults,
-        ];
-        $apiData = $this->api_get($API_URL, $params);
-
-        return $this->decodeList($apiData);
-    }
-
-    /**
      * Parse a youtube URL to get the youtube Vid.
      * Support both full URL (www.youtube.com) and short URL (youtu.be)
      *
@@ -735,7 +711,7 @@ class Youtube
 
             throw new \Exception($msg);
         } else {
-            
+
             if(isset($resObj->items)) {
                 $itemsArray = $resObj->items;
                 if (!is_array($itemsArray) || count($itemsArray) == 0) {
