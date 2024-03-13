@@ -238,13 +238,14 @@ class Youtube
      * @param array $part
      * @return array
      */
-    public function getPopularVideos($regionCode, $maxResults = 10, $part = ['id', 'snippet', 'contentDetails', 'player', 'statistics', 'status'])
+    public function getPopularVideos($regionCode, $videoCategoryId = 0, $maxResults = 10, $part = ['id', 'snippet', 'contentDetails', 'player', 'statistics', 'status'])
     {
         $API_URL = $this->getApi('videos.list');
         $params = [
             'chart' => 'mostPopular',
             'part' => implode(',', $part),
             'regionCode' => $regionCode,
+            'videoCategoryId' => $videoCategoryId,
             'maxResults' => $maxResults,
         ];
 
