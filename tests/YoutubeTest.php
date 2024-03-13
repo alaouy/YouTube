@@ -140,7 +140,8 @@ class YoutubeTest extends TestCase
         $maxResult = rand(10, 30);
         $regionCode = 'us';
         $videoCategoryId = 0;
-        $response = $this->youtube->getPopularVideos($regionCode, $videoCategoryId, $maxResult);
+        $part = ['id', 'snippet', 'contentDetails', 'player', 'statistics', 'status'];
+        $response = $this->youtube->getPopularVideos($regionCode, $maxResult, $part, $videoCategoryId);
 
         $this->assertNotNull('response');
         $this->assertEquals($maxResult, count($response));
