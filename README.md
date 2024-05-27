@@ -88,6 +88,9 @@ $videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
 
 $results = Youtube::searchAdvanced([ /* params */ ]);
 
+// Get channel data by channel handle (like https://www.youtube.com/@google), return an STD PHP object
+$channel = Youtube::getChannelByHandle('google');
+
 // Get channel data by channel name, return an STD PHP object
 $channel = Youtube::getChannelByName('xdadevelopers');
 
