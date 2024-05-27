@@ -192,6 +192,20 @@ class YoutubeTest extends TestCase
         //TODO
     }
 
+    public function testGetChannelByHandle()
+    {
+        $response = $this->youtube->getChannelByHandle('google');
+
+        $this->assertEquals('youtube#channel', $response->kind);
+        //This is not a safe Assertion because the name can change, but include it anyway
+        $this->assertEquals('Google', $response->snippet->title);
+        //add all these assertions here in case the api is changed,
+        //we can detect it instantly
+        $this->assertObjectHasAttribute('snippet', $response);
+        $this->assertObjectHasAttribute('contentDetails', $response);
+        $this->assertObjectHasAttribute('statistics', $response);
+    }
+	
     public function testGetChannelByName()
     {
         $response = $this->youtube->getChannelByName('Google');
