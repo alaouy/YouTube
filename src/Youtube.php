@@ -419,6 +419,28 @@ class Youtube
         return $this->decodeSingle($apiData);
     }
 
+    /**
+     * @param $handleName
+     * @param array $optionalParams
+     * @param array $part
+     * @return \StdClass
+     * @throws \Exception
+     */	
+    public function getChannelByHandle($handleName, $optionalParams = [], $part = ['id', 'snippet', 'contentDetails', 'statistics'])
+    {
+        $API_URL = $this->getApi('channels.list');
+        $params = [
+            'forHandle' => $handleName,
+            'part' => implode(',', $part),
+        ];
+
+        $params = array_merge($params, $optionalParams);
+
+        $apiData = $this->api_get($API_URL, $params);
+
+        return $this->decodeSingle($apiData);
+    }	
+
 	/**
 	 * @param $username
 	 * @param $maxResults
