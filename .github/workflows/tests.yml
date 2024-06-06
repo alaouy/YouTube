@@ -17,14 +17,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.1', '7.2', '7.3', '8.0']
+        php-versions: ['7.1', '7.2', '7.3', '8.0', '8.1', '8.2']
 
     env:
       YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
 
     name: Testing on PHP ${{ matrix.php-versions }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
