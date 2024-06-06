@@ -205,7 +205,7 @@ class YoutubeTest extends TestCase
         $this->assertObjectHasAttribute('contentDetails', $response);
         $this->assertObjectHasAttribute('statistics', $response);
     }
-	
+
     public function testGetChannelByName()
     {
         $response = $this->youtube->getChannelByName('Google');
