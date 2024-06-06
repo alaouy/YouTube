@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "master" ]
   schedule:
-    # To detect any changes on the API we run the test suite every week on Mondays.
+    # To detect any changes on the API we run the test suite every week on Mondays..
     - cron:  '0 7 * * MON'
 
 
