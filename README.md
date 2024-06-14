@@ -238,6 +238,6 @@ Please read the ["Reference" section](https://developers.google.com/youtube/v3/d
 ## Donation
 If you find this project to be of use to you please consider buying me a cup of tea :)
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/alaouym)
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/malaouy)
 ## Credits
 Built on code from Madcoda's [php-youtube-api](https://github.com/madcoda/php-youtube-api).
