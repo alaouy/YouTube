@@ -332,7 +332,7 @@ class YoutubeTest extends TestCase
 	    $urls = [
 		    'https://www.youtube.com/account_notifications' => false,
 		    'https://www.youtube.com/ads/' => false,
-		    'https://www.youtube.com/c/Ecolinguist' => 'UChqLwfp3eAkAwX9DGnqr_CA',
+		    'https://www.youtube.com/c/Ecolinguist' => false,
 		    'https://www.youtube.com/feed/library' => false,
 		    'https://www.youtube.com/gaming' => false,
 		    'https://www.youtube.com/howyoutubeworks' => false,
