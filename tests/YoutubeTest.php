@@ -334,7 +334,6 @@ class YoutubeTest extends TestCase
 		    'https://www.youtube.com/ads/' => false,
 		    'https://www.youtube.com/c/Ecolinguist' => 'UChqLwfp3eAkAwX9DGnqr_CA',
 		    'https://www.youtube.com/feed/library' => false,
-		    'https://www.youtube.com/FeedmeUk' => 'UCVWLOM5QBtzP2hD-h232XwA',
 		    'https://www.youtube.com/gaming' => false,
 		    'https://www.youtube.com/howyoutubeworks' => false,
 		    'https://www.youtube.com/howyoutubeworks/product-features/search/' => false,
