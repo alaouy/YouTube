@@ -1,7 +1,7 @@
 YouTube
 =========
 
-![Travis YouTube Build](https://api.travis-ci.org/alaouy/Youtube.svg?branch=master) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/alaouym)
+[![YouTube Tests](https://github.com/alaouy/YouTube/actions/workflows/tests.yml/badge.svg)](https://github.com/alaouy/YouTube/actions/workflows/tests.yml) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/malaouy)
 
 Laravel PHP Facade/Wrapper for the YouTube Data API v3 ( Non-OAuth )
 
@@ -11,45 +11,45 @@ Laravel PHP Facade/Wrapper for the YouTube Data API v3 ( Non-OAuth )
 - Laravel 5.1 or higher
 - API key from [Google Console](https://console.developers.google.com)
 
-Looking for YouTube Package for either of these: PHP 5, Laravel 5.0, Laravel 4? Visit the [`php5-branch`](https://github.com/alaouy/Youtube/tree/php5)
+Looking for YouTube Package for either of these: PHP 5, Laravel 5.0, Laravel 4? Visit the [`php5-branch`](https://github.com/alaouy/YouTube/tree/php5)
 
 ## Installation
 
 Run in console below command to download package to your project:
-```
+```bash
 composer require alaouy/youtube
 ```
 
 ## Configuration
 
 In `/config/app.php` add YoutubeServiceProvider (Laravel < 5.5):
-```
+```php
 Alaouy\Youtube\YoutubeServiceProvider::class,
 ```
 
 Do not forget to add also YouTube facade there (Laravel < 5.5):
-```
+```php
 'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
 ```
 
 Publish config settings:
-```
+```bach
 $ php artisan vendor:publish --provider="Alaouy\Youtube\YoutubeServiceProvider"
 ```
 
 Set your YouTube API key in the file:
 
-```
+```shell
 /config/youtube.php
 ```
 
 Or in the .env file
-```
+```shell
 YOUTUBE_API_KEY = KEY
 ```
 
 Or you can set the key programmatically at run time :
-```
+```php
 Youtube::setApiKey('KEY');
 ```
 
@@ -67,9 +67,6 @@ $videoList = Youtube::getVideoInfo(['rie-hPVJ7Sw','iKHTawgyKWQ']);
 
 // Get localized video info
 $video = Youtube::getLocalizedVideoInfo('vjF9GgrY9c0', 'pl');
-
-// Get multiple videos related to a video
-$relatedVideos = Youtube::getRelatedVideos('iKHTawgyKWQ');
 
 // Get comment threads by videoId
 $commentThreads = Youtube::getCommentThreadsByVideoId('zwiUB_Lh3iA');
@@ -90,6 +87,9 @@ $videoList = Youtube::searchChannelVideos('keyword', 'UCk1SpWNzOs4MYmr0uICEntg',
 $videoList = Youtube::listChannelVideos('UCk1SpWNzOs4MYmr0uICEntg', 40);
 
 $results = Youtube::searchAdvanced([ /* params */ ]);
+
+// Get channel data by channel handle (like https://www.youtube.com/@google), return an STD PHP object
+$channel = Youtube::getChannelByHandle('google');
 
 // Get channel data by channel name, return an STD PHP object
 $channel = Youtube::getChannelByName('xdadevelopers');
@@ -129,7 +129,7 @@ $videoId = Youtube::parseVidFromURL('https://www.youtube.com/watch?v=moSFlvxnbgk
 ];
 ```
 
-You can use the bail rule in conjunction with this in order to prevent unnecessary queries.  
+You can use the bail rule in conjunction with this in order to prevent unnecessary queries.
 
 ## Basic Search Pagination
 
@@ -238,6 +238,6 @@ Please read the ["Reference" section](https://developers.google.com/youtube/v3/d
 ## Donation
 If you find this project to be of use to you please consider buying me a cup of tea :)
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/alaouym)
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/malaouy)
 ## Credits
 Built on code from Madcoda's [php-youtube-api](https://github.com/madcoda/php-youtube-api).
