@@ -603,31 +603,66 @@ class Youtube
     }
 
     /**
-     * Parse a youtube URL to get the youtube Vid.
-     * Support both full URL (www.youtube.com) and short URL (youtu.be)
+     * Parse a YouTube URL to get the YouTube Video ID.
+     * Supports full URL (www.youtube.com), short URL (youtu.be),
+     * embed URL, and live stream URL.
      *
      * @param  string $youtube_url
      * @throws \Exception
-     * @return string Video Id
+     * @return string Video ID
      */
     public static function parseVidFromURL($youtube_url)
     {
-        if (strpos($youtube_url, 'youtube.com')) {
-            if (strpos($youtube_url, 'embed')) {
-                $path = static::_parse_url_path($youtube_url);
-                $vid = substr($path, 7);
-                return $vid;
-            } else {
+        // Parse the URL into its components
+        $parsedUrl = parse_url($youtube_url);
+
+        // Check if it's a valid YouTube URL
+        if (isset($parsedUrl['host'], $parsedUrl['path'])) {
+
+            // Handle full YouTube URL (www.youtube.com)
+            if (strpos($parsedUrl['host'], 'youtube.com') !== false) {
+
+                // Handle embed URLs (e.g., https://www.youtube.com/embed/{video_id})
+                if (strpos($parsedUrl['path'], '/embed/') === 0) {
+                    $path = static::_parse_url_path($youtube_url);
+                    $vid = substr($path, strlen('/embed/'));
+
+                    return $vid;
+                }
+
+                // Handle live URLs (e.g., https://www.youtube.com/live/{video_id})
+                if (strpos($parsedUrl['path'], '/live/') === 0) {
+                    $path = static::_parse_url_path($youtube_url);
+                    $vid = substr($path, strlen('/live/'));
+
+                    return $vid;
+                }
+
+                // Handle /v/ URLs (e.g., https://www.youtube.com/v/{video_id})
+                if (strpos($parsedUrl['path'], '/v/') === 0) {
+                    $path = static::_parse_url_path($youtube_url);
+                    $vid = substr($path, strlen('/v/'));
+
+                    return $vid;
+                }
+
+                // Handle standard YouTube video URLs (e.g., https://www.youtube.com/watch?v={video_id})
                 $params = static::_parse_url_query($youtube_url);
-                return $params['v'];
+                if (isset($params['v'])) {
+                    return $params['v'];
+                }
+
+                // Handle short YouTube URLs (e.g., https://youtu.be/{video_id})
+            } else if (strpos($parsedUrl['host'], 'youtu.be') !== false) {
+                $path = static::_parse_url_path($youtube_url);
+                $vid = substr($path, 1); // Remove the leading '/'
+
+                return $vid;
             }
-        } else if (strpos($youtube_url, 'youtu.be')) {
-            $path = static::_parse_url_path($youtube_url);
-            $vid = substr($path, 1);
-            return $vid;
-        } else {
-            throw new \Exception('The supplied URL does not look like a Youtube URL');
         }
+
+        // If no valid video ID is found, throw an exception
+        throw new \Exception('The supplied URL does not look like a valid YouTube URL');
     }
 
     /**

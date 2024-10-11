@@ -275,24 +275,6 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#playlistItem', $data[0]->kind);
     }
 
-    public function testParseVIdFromURLFull()
-    {
-        $vId = $this->youtube->parseVidFromURL('http://www.youtube.com/watch?v=1FJHYqE0RDg');
-        $this->assertEquals('1FJHYqE0RDg', $vId);
-    }
-
-    public function testParseVIdFromURLShort()
-    {
-        $vId = $this->youtube->parseVidFromURL('http://youtu.be/1FJHYqE0RDg');
-        $this->assertEquals('1FJHYqE0RDg', $vId);
-    }
-
-    public function testParseVIdFromEmbedURL()
-    {
-        $vId = $this->youtube->parseVidFromURL('http://youtube.com/embed/1FJHYqE0RDg');
-        $this->assertEquals('1FJHYqE0RDg', $vId);
-    }
-
     /**
      * @dataProvider urlProvider
      */
@@ -379,5 +361,33 @@ class YoutubeTest extends TestCase
 
         $response = $this->youtube->getPlaylistsByChannelId($channelId);
         $this->assertEquals($response->getStatusCode(), 404);
+    }
+
+    /**
+     * @dataProvider youtubeUrlProvider
+     */
+    public function testParseVidFromURL($url, $expectedVideoId)
+    {
+        $vId = $this->youtube->parseVidFromURL($url);
+        $this->assertEquals($expectedVideoId, $vId);
+    }
+
+    public function youtubeUrlProvider()
+    {
+        return [
+            ['http://www.youtube.com/watch?v=1FJHYqE0RDg', '1FJHYqE0RDg'],
+            ['http://youtu.be/1FJHYqE0RDg', '1FJHYqE0RDg'],
+            ['http://youtube.com/embed/1FJHYqE0RDg', '1FJHYqE0RDg'],
+            ['https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'dQw4w9WgXcQ'],
+            ['https://youtu.be/dQw4w9WgXcQ', 'dQw4w9WgXcQ'],
+            ['https://youtu.be/ymNFyxvIdaM?si=7Ei20mEhPzrS_nZs', 'ymNFyxvIdaM'],
+            ['https://www.youtube.com/watch?v=ymNFyxvIdaM&ab_channel=BomfunkMCsVEVO', 'ymNFyxvIdaM'],
+            ['https://www.youtube.com/embed/dQw4w9WgXcQ', 'dQw4w9WgXcQ'],
+            ['https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PL590L5WQmH8dKahcfw2Uw8Ud28p4C9XDP', 'dQw4w9WgXcQ'],
+            ['https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=60', 'dQw4w9WgXcQ'],
+            ['https://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=youtu.be&t=90', 'dQw4w9WgXcQ'],
+            ['https://www.youtube.com/v/dQw4w9WgXcQ?version=3&autohide=1', 'dQw4w9WgXcQ'],
+            ['https://www.youtube.com/live/JAkh_0QKtMg?si=roYDVwBJ4csi6df_', 'JAkh_0QKtMg']
+        ];
     }
 }
