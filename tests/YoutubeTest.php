@@ -69,7 +69,7 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#videoCategory', $response[0]->kind);
         //add all these assertions here in case the api is changed,
         //we can detect it instantly
-        $this->assertObjectHasAttribute('snippet', $response[0]);
+        $this->assertObjectHasProperty('snippet', $response[0]);
     }
 
     public function testGetCommentThreadsByVideoId()
@@ -81,9 +81,9 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#commentThread', $response[0]->kind);
         //add all these assertions here in case the api is changed,
         //we can detect it instantly
-        $this->assertObjectHasAttribute('etag', $response[0]);
-        $this->assertObjectHasAttribute('id', $response[0]);
-        $this->assertObjectHasAttribute('snippet', $response[0]);
+        $this->assertObjectHasProperty('etag', $response[0]);
+        $this->assertObjectHasProperty('id', $response[0]);
+        $this->assertObjectHasProperty('snippet', $response[0]);
     }
 
     public function testGetVideoInfo()
@@ -96,10 +96,10 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#video', $response->kind);
         //add all these assertions here in case the api is changed,
         //we can detect it instantly
-        $this->assertObjectHasAttribute('statistics', $response);
-        $this->assertObjectHasAttribute('status', $response);
-        $this->assertObjectHasAttribute('snippet', $response);
-        $this->assertObjectHasAttribute('contentDetails', $response);
+        $this->assertObjectHasProperty('statistics', $response);
+        $this->assertObjectHasProperty('status', $response);
+        $this->assertObjectHasProperty('snippet', $response);
+        $this->assertObjectHasProperty('contentDetails', $response);
     }
 
     public function testGetLocalizedVideoInfo()
@@ -113,10 +113,10 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#video', $response->kind);
         //add all these assertions here in case the api is changed,
         //we can detect it instantly
-        $this->assertObjectHasAttribute('statistics', $response);
-        $this->assertObjectHasAttribute('status', $response);
-        $this->assertObjectHasAttribute('snippet', $response);
-        $this->assertObjectHasAttribute('contentDetails', $response);
+        $this->assertObjectHasProperty('statistics', $response);
+        $this->assertObjectHasProperty('status', $response);
+        $this->assertObjectHasProperty('snippet', $response);
+        $this->assertObjectHasProperty('contentDetails', $response);
     }
 
     public function testGetVideoInfoMultiple()
@@ -129,10 +129,10 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#video', $response[0]->kind);
         //add all these assertions here in case the api is changed,
         //we can detect it instantly
-        $this->assertObjectHasAttribute('statistics', $response[0]);
-        $this->assertObjectHasAttribute('status', $response[0]);
-        $this->assertObjectHasAttribute('snippet', $response[0]);
-        $this->assertObjectHasAttribute('contentDetails', $response[0]);
+        $this->assertObjectHasProperty('statistics', $response[0]);
+        $this->assertObjectHasProperty('status', $response[0]);
+        $this->assertObjectHasProperty('snippet', $response[0]);
+        $this->assertObjectHasProperty('contentDetails', $response[0]);
     }
 
     public function testGetPopularVideos()
@@ -146,10 +146,10 @@ class YoutubeTest extends TestCase
         $this->assertNotNull('response');
         $this->assertEquals($maxResult, count($response));
         $this->assertEquals('youtube#video', $response[0]->kind);
-        $this->assertObjectHasAttribute('statistics', $response[0]);
-        $this->assertObjectHasAttribute('status', $response[0]);
-        $this->assertObjectHasAttribute('snippet', $response[0]);
-        $this->assertObjectHasAttribute('contentDetails', $response[0]);
+        $this->assertObjectHasProperty('statistics', $response[0]);
+        $this->assertObjectHasProperty('status', $response[0]);
+        $this->assertObjectHasProperty('snippet', $response[0]);
+        $this->assertObjectHasProperty('contentDetails', $response[0]);
     }
 
     public function testSearch()
@@ -201,9 +201,9 @@ class YoutubeTest extends TestCase
         $this->assertEquals('Google', $response->snippet->title);
         //add all these assertions here in case the api is changed,
         //we can detect it instantly
-        $this->assertObjectHasAttribute('snippet', $response);
-        $this->assertObjectHasAttribute('contentDetails', $response);
-        $this->assertObjectHasAttribute('statistics', $response);
+        $this->assertObjectHasProperty('snippet', $response);
+        $this->assertObjectHasProperty('contentDetails', $response);
+        $this->assertObjectHasProperty('statistics', $response);
     }
 
     public function testGetChannelByName()
@@ -215,9 +215,9 @@ class YoutubeTest extends TestCase
         $this->assertEquals('Google', $response->snippet->title);
         //add all these assertions here in case the api is changed,
         //we can detect it instantly
-        $this->assertObjectHasAttribute('snippet', $response);
-        $this->assertObjectHasAttribute('contentDetails', $response);
-        $this->assertObjectHasAttribute('statistics', $response);
+        $this->assertObjectHasProperty('snippet', $response);
+        $this->assertObjectHasProperty('contentDetails', $response);
+        $this->assertObjectHasProperty('statistics', $response);
     }
 
     public function testGetChannelById()
@@ -227,15 +227,15 @@ class YoutubeTest extends TestCase
 
         $this->assertEquals('youtube#channel', $response->kind);
         $this->assertEquals($channelId, $response->id);
-        $this->assertObjectHasAttribute('snippet', $response);
-        $this->assertObjectHasAttribute('contentDetails', $response);
-        $this->assertObjectHasAttribute('statistics', $response);
+        $this->assertObjectHasProperty('snippet', $response);
+        $this->assertObjectHasProperty('contentDetails', $response);
+        $this->assertObjectHasProperty('statistics', $response);
     }
 
     public function testGetPlaylistsByChannelId()
     {
-        $GOOGLE_CHANNELID = 'UCK8sQmJBp8GCxrOtXWBpyEA';
-        $response = $this->youtube->getPlaylistsByChannelId($GOOGLE_CHANNELID);
+        $channelId = 'UCK8sQmJBp8GCxrOtXWBpyEA';
+        $response = $this->youtube->getPlaylistsByChannelId($channelId);
 
         $this->assertTrue(count($response) > 0);
         $this->assertEquals('youtube#playlist', $response['results'][0]->kind);
@@ -245,8 +245,8 @@ class YoutubeTest extends TestCase
     public function testGetPlaylistById()
     {
         //get one of the playlist
-        $GOOGLE_CHANNELID = 'UCK8sQmJBp8GCxrOtXWBpyEA';
-        $response = $this->youtube->getPlaylistsByChannelId($GOOGLE_CHANNELID);
+        $channelId = 'UCK8sQmJBp8GCxrOtXWBpyEA';
+        $response = $this->youtube->getPlaylistsByChannelId($channelId);
         $playlist = $response['results'][0];
 
         $response = $this->youtube->getPlaylistById($playlist->id);
@@ -256,8 +256,8 @@ class YoutubeTest extends TestCase
     public function testGetPlaylistByMultipleIds()
     {
         //get one of the playlist
-        $GOOGLE_CHANNELID = 'UCK8sQmJBp8GCxrOtXWBpyEA';
-        $response = $this->youtube->getPlaylistsByChannelId($GOOGLE_CHANNELID);
+        $channelId = 'UCK8sQmJBp8GCxrOtXWBpyEA';
+        $response = $this->youtube->getPlaylistsByChannelId($channelId);
         $playlists = $response['results'];
 
         $response = $this->youtube->getPlaylistById([$playlists[0]->id, $playlists[1]->id]);
@@ -292,8 +292,8 @@ class YoutubeTest extends TestCase
 
     public function testGetActivitiesByChannelId()
     {
-        $GOOGLE_CHANNELID = 'UCK8sQmJBp8GCxrOtXWBpyEA';
-        $response = $this->youtube->getActivitiesByChannelId($GOOGLE_CHANNELID);
+        $channelId = 'UCK8sQmJBp8GCxrOtXWBpyEA';
+        $response = $this->youtube->getActivitiesByChannelId($channelId);
         $this->assertTrue(count($response) > 0);
         $this->assertEquals('youtube#activity', $response[0]->kind);
         // $this->assertEquals('Google', $response[0]->snippet->channelTitle);
