@@ -387,7 +387,10 @@ class YoutubeTest extends TestCase
             ['https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=60', 'dQw4w9WgXcQ'],
             ['https://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=youtu.be&t=90', 'dQw4w9WgXcQ'],
             ['https://www.youtube.com/v/dQw4w9WgXcQ?version=3&autohide=1', 'dQw4w9WgXcQ'],
-            ['https://www.youtube.com/live/JAkh_0QKtMg?si=roYDVwBJ4csi6df_', 'JAkh_0QKtMg']
+            ['https://www.youtube.com/live/JAkh_0QKtMg?si=roYDVwBJ4csi6df_', 'JAkh_0QKtMg'],
+            ['https://www.youtube.com/shorts/lXSwVeKW1QE', 'lXSwVeKW1QE'],
+            ['https://www.youtube.com/shorts/abc123_-XYZ', 'abc123_-XYZ'],
+            ['https://youtube.com/shorts/dQw4w9WgXcQ', 'dQw4w9WgXcQ']
         ];
     }
 }

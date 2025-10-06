@@ -638,6 +638,11 @@ class Youtube
                     return $vid;
                 }
 
+                // Handle YouTube Shorts URLs (e.g., https://www.youtube.com/shorts/{video_id})
+                if (preg_match('#/shorts/([a-zA-Z0-9_-]+)#', $parsedUrl['path'], $matches)) {
+                    return $matches[1];
+                }
+
                 // Handle /v/ URLs (e.g., https://www.youtube.com/v/{video_id})
                 if (strpos($parsedUrl['path'], '/v/') === 0) {
                     $path = static::_parse_url_path($youtube_url);
