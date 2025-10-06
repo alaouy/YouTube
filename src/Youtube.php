@@ -638,6 +638,11 @@ class Youtube
                     return $vid;
                 }
 
+                // Handle YouTube Shorts URLs (e.g., https://www.youtube.com/shorts/{video_id})
+                if (preg_match('#/shorts/([a-zA-Z0-9_-]+)#', $parsedUrl['path'], $matches)) {
+                    return $matches[1];
+                }
+
                 // Handle /v/ URLs (e.g., https://www.youtube.com/v/{video_id})
                 if (strpos($parsedUrl['path'], '/v/') === 0) {
                     $path = static::_parse_url_path($youtube_url);
@@ -650,6 +655,11 @@ class Youtube
                 $params = static::_parse_url_query($youtube_url);
                 if (isset($params['v'])) {
                     return $params['v'];
+                }
+
+                // Handle playlist URLs (e.g., https://www.youtube.com/playlist?list={playlist_id})
+                if (isset($params['list'])) {
+                    return $params['list'];
                 }
 
                 // Handle short YouTube URLs (e.g., https://youtu.be/{video_id})
