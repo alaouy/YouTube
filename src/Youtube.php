@@ -657,11 +657,6 @@ class Youtube
                     return $params['v'];
                 }
 
-                // Handle playlist URLs (e.g., https://www.youtube.com/playlist?list={playlist_id})
-                if (isset($params['list'])) {
-                    return $params['list'];
-                }
-
                 // Handle short YouTube URLs (e.g., https://youtu.be/{video_id})
             } else if (strpos($parsedUrl['host'], 'youtu.be') !== false) {
                 $path = static::_parse_url_path($youtube_url);
