@@ -132,12 +132,13 @@ class Youtube
      * @param string $order         Specifies the order in which the API response should list comment threads. Valid values are: time, relevance.
      * @param array $part           Specifies a list of one or more commentThread resource properties that the API response will include.
      * @param bool $pageInfo        Add page info to returned array.
+     * @param string $pageToken     The pageToken parameter identifies a specific page in the result set that should be returned.
      * @return array
      * @throws \Exception
      */
-    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false) {
+    public function getCommentThreadsByVideoId($videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false, $pageToken = null) {
 
-        return $this->getCommentThreads(null, null, $videoId, $maxResults, $order, $part, $pageInfo);
+        return $this->getCommentThreads(null, null, $videoId, $maxResults, $order, $part, $pageInfo, $pageToken);
     }
 
     /**
@@ -148,10 +149,11 @@ class Youtube
      * @param string $order         Specifies the order in which the API response should list comment threads. Valid values are: time, relevance.
      * @param array $part           Specifies a list of one or more commentThread resource properties that the API response will include.
      * @param bool $pageInfo        Add page info to returned array.
+     * @param string $pageToken     The pageToken parameter identifies a specific page in the result set that should be returned.     
      * @return array
      * @throws \Exception
      */
-    public function getCommentThreads($channelId = null, $id = null, $videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false)
+    public function getCommentThreads($channelId = null, $id = null, $videoId = null, $maxResults = 20, $order = null, $part = ['id', 'replies', 'snippet'], $pageInfo = false, $pageToken = null)
     {
         $API_URL = $this->getApi('commentThreads.list');
 
@@ -162,6 +164,7 @@ class Youtube
             'maxResults' => $maxResults,
             'part' => implode(',', $part),
             'order' => $order,
+	    'pageToken' => $pageToken,
         ]);
 
         $apiData = $this->api_get($API_URL, $params);
