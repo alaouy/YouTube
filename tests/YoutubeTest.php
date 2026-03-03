@@ -3,6 +3,7 @@
 namespace Alaouy\Youtube\Tests;
 
 use Alaouy\Youtube\Youtube;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class YoutubeTest extends TestCase
@@ -20,7 +21,7 @@ class YoutubeTest extends TestCase
         $this->youtube = null;
     }
 
-    public function urlProvider()
+    public static function urlProvider()
     {
         return [
             ['https://'],
@@ -275,9 +276,7 @@ class YoutubeTest extends TestCase
         $this->assertEquals('youtube#playlistItem', $data[0]->kind);
     }
 
-    /**
-     * @dataProvider urlProvider
-     */
+    #[DataProvider('urlProvider')]
     public function testParseVIdFromURLException($url)
     {
         $this->expectException(\Exception::class);
@@ -363,16 +362,14 @@ class YoutubeTest extends TestCase
         $this->assertEquals($response->getStatusCode(), 404);
     }
 
-    /**
-     * @dataProvider youtubeUrlProvider
-     */
+    #[DataProvider('youtubeUrlProvider')]
     public function testParseVidFromURL($url, $expectedVideoId)
     {
         $vId = $this->youtube->parseVidFromURL($url);
         $this->assertEquals($expectedVideoId, $vId);
     }
 
-    public function youtubeUrlProvider()
+    public static function youtubeUrlProvider()
     {
         return [
             ['http://www.youtube.com/watch?v=1FJHYqE0RDg', '1FJHYqE0RDg'],
